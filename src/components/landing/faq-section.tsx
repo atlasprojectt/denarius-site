@@ -30,6 +30,10 @@ const QUESTIONS = [
     a: "Sim. Os nomes são visíveis apenas para administradores por padrão, e o armazenamento por pessoa pode ser desativado por completo, mantendo tudo no nível de time.",
   },
   {
+    q: "Como funciona a cobrança?",
+    a: "É uma mensalidade fixa, definida pela faixa de tamanho da empresa — não há cobrança por token nem por volume de gasto monitorado. A contratação é conduzida pela nossa equipe, então o valor é fechado na conversa.",
+  },
+  {
     q: "Quais provedores são compatíveis?",
     a: "OpenAI e Anthropic são as integrações medidas na v1. Assinaturas e assentos de outras ferramentas de IA podem ser registrados manualmente e entram no mesmo orçamento.",
   },

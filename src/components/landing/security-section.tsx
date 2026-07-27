@@ -1,29 +1,50 @@
+import {
+  EyeIcon,
+  KeyRoundIcon,
+  FileTextIcon,
+  UsersIcon,
+  ClockIcon,
+  BellIcon,
+} from "lucide-react";
+import { FeatureCard } from "@/components/feature-section";
 import { Section } from "./section";
 
 const POINTS = [
   {
     title: "Acesso somente para leitura",
-    text: "As chaves são usadas apenas para ler dados de uso e custo. O Denarius não altera nem bloqueia nada nas suas contas.",
+    icon: <EyeIcon />,
+    description:
+      "As chaves são usadas apenas para ler dados de uso e custo. Nada é alterado ou bloqueado nas suas contas.",
   },
   {
     title: "Credenciais armazenadas com segurança",
-    text: "As chaves são criptografadas, nunca registradas em log e podem ser giradas ou revogadas a qualquer momento.",
+    icon: <KeyRoundIcon />,
+    description:
+      "As chaves são criptografadas, nunca registradas em log e podem ser giradas ou revogadas a qualquer momento.",
   },
   {
     title: "Metadados, não conteúdo",
-    text: "O Denarius guarda metadados de uso — tokens, custo, modelo, data. Prompts e respostas nunca são armazenados.",
+    icon: <FileTextIcon />,
+    description:
+      "Guardamos metadados de uso — tokens, custo, modelo, data. Prompts e respostas nunca são armazenados.",
   },
   {
     title: "Visibilidade individual por permissão",
-    text: "O dado por pessoa é restrito a administradores por padrão e pode ser desativado, mantendo o foco nos times.",
+    icon: <UsersIcon />,
+    description:
+      "O dado por pessoa é restrito a administradores por padrão e pode ser desativado, mantendo o foco nos times.",
   },
   {
     title: "Transparência sobre os dados",
-    text: "Cada número mostra quando foi atualizado. Falhas de sincronização e gastos não atribuídos aparecem de forma explícita.",
+    icon: <ClockIcon />,
+    description:
+      "Cada número mostra quando foi atualizado. Falhas de sincronização e gastos não atribuídos aparecem de forma explícita.",
   },
   {
     title: "Monitora e orienta, não bloqueia",
-    text: "O Denarius acompanha, avisa e recomenda. Ele não interrompe o uso dos provedores — a decisão é sempre da empresa.",
+    icon: <BellIcon />,
+    description:
+      "O Denarius acompanha, avisa e recomenda. Ele não interrompe o uso dos provedores — a decisão é sempre da empresa.",
   },
 ];
 
@@ -34,15 +55,16 @@ export function SecuritySection() {
       eyebrow="Segurança e confiança"
       title="Criado para dados financeiros e de uso sensíveis."
     >
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {POINTS.map((point) => (
-          <article key={point.title}>
-            <h3 className="font-medium">{point.title}</h3>
-            <p className="mt-2 text-sm leading-7 text-muted-foreground">
-              {point.text}
-            </p>
-          </article>
-        ))}
+      <div className="overflow-hidden rounded-xl border border-border">
+        <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {POINTS.map((point) => (
+            <FeatureCard
+              key={point.title}
+              feature={point}
+              className="bg-background"
+            />
+          ))}
+        </div>
       </div>
     </Section>
   );

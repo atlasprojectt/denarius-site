@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* Class-based dark variant (matches the Denarius app) so the landing can be
    pinned to dark mode via a `dark` class on <html>. */
@@ -144,4 +145,95 @@
       scroll-behavior: auto !important;
     }
   }
+}
+
+/* ---------------------------------------------------------------------------
+   MODO WIREFRAME — só para revisar a estrutura da página.
+   Achata cor, fundo, sombra e imagem em linhas de contorno.
+   Para voltar ao design real: remova "wireframe" do <html> em layout.tsx.
+--------------------------------------------------------------------------- */
+.wireframe {
+  color-scheme: dark;
+  --wf-line: #333;
+  --wf-line-strong: #5c5c5c;
+  --wf-ink: #e8e8e8;
+  --wf-dim: #7a7a7a;
+  background: #0a0a0a !important;
+}
+
+.wireframe *,
+.wireframe *::before,
+.wireframe *::after {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  filter: none !important;
+  color: var(--wf-ink) !important;
+  border-color: var(--wf-line) !important;
+  border-radius: 2px !important;
+}
+
+/* Blocos estruturais — linha mais forte. */
+.wireframe header,
+.wireframe main,
+.wireframe footer,
+.wireframe section {
+  outline: 1px solid var(--wf-line-strong);
+  outline-offset: -1px;
+}
+
+/* Conteúdo dentro dos blocos — linha mais leve. */
+.wireframe article,
+.wireframe nav,
+.wireframe ul,
+.wireframe ol,
+.wireframe dl,
+.wireframe table,
+.wireframe figure,
+.wireframe details,
+.wireframe button,
+.wireframe [data-asset],
+.wireframe [role="img"],
+.wireframe a[class*="inline-flex"] {
+  outline: 1px solid var(--wf-line);
+  outline-offset: -1px;
+}
+
+/* Cada seção mostra sua âncora, para ler a ordem da página. */
+.wireframe section[id]::before,
+.wireframe div[id]:has(> header)::before {
+  content: "#" attr(id);
+  display: block;
+  padding: 2px 6px;
+  border-bottom: 1px solid var(--wf-line);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  color: var(--wf-dim) !important;
+}
+
+/* Imagens viram caixas vazias, mantendo o espaço que ocupam. */
+.wireframe *:has(> img) {
+  outline: 1px solid var(--wf-line);
+  outline-offset: -1px;
+}
+
+.wireframe img {
+  visibility: hidden !important;
+}
+
+/* Decoração (glow, bolinhas, setas) sai de cena. */
+.wireframe [aria-hidden="true"] {
+  display: none !important;
+}
+
+/* Ícones ficam discretos; o header para de flutuar sobre o conteúdo. */
+.wireframe svg {
+  opacity: 0.35 !important;
+}
+
+.wireframe header {
+  position: static !important;
 }
