@@ -23,12 +23,12 @@ export function Section({
   narrow = false,
 }: SectionProps) {
   return (
-    <section id={id} className="border-t border-black/10 dark:border-white/10">
+    <section id={id} className="border-t border-border">
       <div
-        className={`mx-auto w-full ${narrow ? "max-w-3xl" : "max-w-5xl"} px-6 py-16 sm:py-20`}
+        className={`mx-auto w-full ${narrow ? "max-w-3xl" : "max-w-6xl"} px-6 py-16 sm:py-20`}
       >
         {eyebrow ? (
-          <p className="mb-2 text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          <p className="mb-2 text-sm font-medium uppercase tracking-wide text-muted-foreground">
             {eyebrow}
           </p>
         ) : null}
@@ -38,7 +38,7 @@ export function Section({
           </h2>
         ) : null}
         {intro ? (
-          <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
             {intro}
           </p>
         ) : null}

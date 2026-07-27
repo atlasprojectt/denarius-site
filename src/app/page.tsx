@@ -1,37 +1,29 @@
-import { Capabilities } from "@/components/landing/capabilities";
-import { Faq } from "@/components/landing/faq";
-import { Features } from "@/components/landing/features";
-import { FinalCta } from "@/components/landing/final-cta";
-import { Footer } from "@/components/landing/footer";
-import { Header } from "@/components/landing/header";
-import { Hero } from "@/components/landing/hero";
-import { HowItWorks } from "@/components/landing/how-it-works";
-import { Integrations } from "@/components/landing/integrations";
-import { Problem } from "@/components/landing/problem";
-import { Security } from "@/components/landing/security";
-import { TrustStrip } from "@/components/landing/trust-strip";
-import { UseCases } from "@/components/landing/use-cases";
-import { Verdict } from "@/components/landing/verdict";
+import { AudienceSection } from "@/components/landing/audience-section";
+import { FAQSection } from "@/components/landing/faq-section";
+import { FinalCTASection } from "@/components/landing/final-cta-section";
+import { HeroSection } from "@/components/landing/hero-section";
+import { HowItWorksSection } from "@/components/landing/how-it-works-section";
+import { LandingFooter } from "@/components/landing/landing-footer";
+import { LandingHeader } from "@/components/landing/landing-header";
+import { ProblemSection } from "@/components/landing/problem-section";
+import { ProductSection } from "@/components/landing/product-section";
+import { SecuritySection } from "@/components/landing/security-section";
 
 export default function Home() {
   return (
     <div id="topo" className="flex flex-1 flex-col font-sans">
-      <Header />
+      <LandingHeader />
       <main className="flex-1">
-        <Hero />
-        <TrustStrip />
-        <Problem />
-        <Verdict />
-        <Features />
-        <HowItWorks />
-        <Capabilities />
-        <UseCases />
-        <Integrations />
-        <Security />
-        <Faq />
-        <FinalCta />
+        <HeroSection />
+        <ProblemSection />
+        <ProductSection />
+        <HowItWorksSection />
+        <AudienceSection />
+        <SecuritySection />
+        <FAQSection />
+        <FinalCTASection />
       </main>
-      <Footer />
+      <LandingFooter />
     </div>
   );
 }
