@@ -1,13 +1,14 @@
 import { LogoWordmark } from "@/components/domain/logo";
 import { CtaLink } from "./cta-link";
-import { BOOK_DEMO_ANCHOR, SIGN_IN_URL } from "./links";
+import { MobileNav } from "./mobile-nav";
+import { SIGN_IN_URL, WAITLIST_ANCHOR } from "./links";
 
 const NAV_LINKS = [
+  { href: "#problema", label: "O problema" },
   { href: "#produto", label: "Produto" },
   { href: "#como-funciona", label: "Como funciona" },
-  { href: "#seguranca", label: "Segurança" },
-  { href: "#planos", label: "Planos" },
-  { href: "#perguntas-frequentes", label: "Perguntas frequentes" },
+  { href: "#confianca", label: "Confiança" },
+  { href: "#perguntas-frequentes", label: "Perguntas" },
 ];
 
 export function LandingHeader() {
@@ -28,7 +29,7 @@ export function LandingHeader() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="rounded-md px-3 py-2 transition-colors hover:bg-white/5 hover:text-foreground"
+                  className="rounded-md px-3 py-2 transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 >
                   {link.label}
                 </a>
@@ -40,11 +41,12 @@ export function LandingHeader() {
         <div className="flex items-center gap-2">
           <a
             href={SIGN_IN_URL}
-            className="hidden rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground sm:inline-block"
+            className="hidden rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground lg:inline-block"
           >
             Entrar
           </a>
-          <CtaLink href={BOOK_DEMO_ANCHOR}>Agendar demonstração</CtaLink>
+          <CtaLink href={WAITLIST_ANCHOR}>Entrar na lista</CtaLink>
+          <MobileNav links={NAV_LINKS} />
         </div>
       </div>
     </header>

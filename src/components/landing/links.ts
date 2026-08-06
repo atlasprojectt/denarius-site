@@ -1,20 +1,19 @@
-// Temporary CTA destinations for the landing skeleton.
-// TODO: replace with real routes once scheduling / auth / legal pages exist.
+// Destinos de navegação e conversão da landing.
 
-/** In-page anchor to the final conversion section. */
-export const BOOK_DEMO_ANCHOR = "#agendar-demonstracao";
+/**
+ * Objetivo único de conversão da página: a lista de acesso.
+ * Header, hero e fechamento apontam todos para cá.
+ */
+export const WAITLIST_ANCHOR = "#lista-de-acesso";
 
-/** TODO: replace with the real scheduling link (e.g. Cal.com / Calendly). */
-export const BOOK_DEMO_URL = "#";
-
-/** TODO: replace with the app's sign-in route when the product ships. */
+/** TODO: trocar pela rota de login do app quando ele for publicado. */
 export const SIGN_IN_URL = "#";
 
-/** TODO: replace with a real contact route or mailto. */
+/** TODO: trocar por uma rota de contato real ou mailto. */
 export const CONTACT_URL = "#";
 
-/** TODO: replace with the real privacy policy page. */
+/** TODO: trocar pela página real de privacidade. */
 export const PRIVACY_URL = "#";
 
-/** TODO: replace with the real terms page. */
+/** TODO: trocar pela página real de termos. */
 export const TERMS_URL = "#";

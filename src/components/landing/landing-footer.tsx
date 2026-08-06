@@ -1,20 +1,20 @@
 import { LogoWordmark } from "@/components/domain/logo";
 import {
-  BOOK_DEMO_ANCHOR,
   CONTACT_URL,
   PRIVACY_URL,
   SIGN_IN_URL,
   TERMS_URL,
+  WAITLIST_ANCHOR,
 } from "./links";
 
 const COLUMNS = [
   {
     heading: "Produto",
     links: [
+      { href: "#problema", label: "O problema" },
       { href: "#produto", label: "Produto" },
       { href: "#como-funciona", label: "Como funciona" },
-      { href: "#seguranca", label: "Segurança" },
-      { href: "#planos", label: "Planos" },
+      { href: "#confianca", label: "Confiança" },
     ],
   },
   {
@@ -29,7 +29,7 @@ const COLUMNS = [
     heading: "Conta",
     links: [
       { href: SIGN_IN_URL, label: "Entrar" },
-      { href: BOOK_DEMO_ANCHOR, label: "Agendar demonstração" },
+      { href: WAITLIST_ANCHOR, label: "Entrar na lista de acesso" },
     ],
   },
 ];
