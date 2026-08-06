@@ -1,4 +1,5 @@
 import { AssetSlot } from "./asset-slot";
+import { Reveal } from "./reveal";
 import { Section } from "./section";
 
 /**
@@ -42,21 +43,23 @@ export function VerdictSection() {
       surface="raised"
       spacious
     >
-      <figure>
-        <AssetSlot
-          id="veredito-barra"
-          ratio="16 / 3"
-          brief="A barra que abre o painel: o ponto de status, a frase do veredito, a ação para o time citado e o carimbo da última sincronização."
-        />
-        <figcaption className="mt-4 text-sm text-muted-foreground">
-          A primeira linha do painel. Ao lado dela, a data da última
-          sincronização — para que o número nunca apareça sem contexto.
-        </figcaption>
-      </figure>
+      <Reveal>
+        <figure>
+          <AssetSlot
+            id="veredito-barra"
+            ratio="16 / 3"
+            brief="A barra que abre o painel: o ponto de status, a frase do veredito, a ação para o time citado e o carimbo da última sincronização."
+          />
+          <figcaption className="mt-4 text-sm text-muted-foreground">
+            A primeira linha do painel. Ao lado dela, a data da última
+            sincronização — para que o número nunca apareça sem contexto.
+          </figcaption>
+        </figure>
+      </Reveal>
 
       <dl className="mt-14 grid gap-8 sm:grid-cols-3 sm:gap-10">
-        {STATES.map((state) => (
-          <div key={state.status}>
+        {STATES.map((state, index) => (
+          <Reveal key={state.status} delay={index * 0.08}>
             <span
               aria-hidden="true"
               className={`block h-0.5 w-12 rounded-full ${state.bar}`}
@@ -68,7 +71,7 @@ export function VerdictSection() {
             <dd className="mt-4 border-l border-border pl-4 text-sm leading-6 text-foreground/90">
               {state.example}
             </dd>
-          </div>
+          </Reveal>
         ))}
       </dl>
     </Section>

@@ -54,7 +54,7 @@ export function LandingFooter() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="transition-colors hover:text-foreground"
+                      className="rounded-md transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                     >
                       {link.label}
                     </a>
@@ -71,7 +71,7 @@ export function LandingFooter() {
             <li>
               <a
                 href={PRIVACY_URL}
-                className="transition-colors hover:text-foreground"
+                className="rounded-md transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
                 Privacidade
               </a>
@@ -79,7 +79,7 @@ export function LandingFooter() {
             <li>
               <a
                 href={TERMS_URL}
-                className="transition-colors hover:text-foreground"
+                className="rounded-md transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
                 Termos
               </a>

@@ -17,7 +17,7 @@ export function LandingHeader() {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 px-6">
         <a
           href="#topo"
-          className="flex items-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="flex items-center rounded-md opacity-100 transition-opacity duration-(--duration-standard) ease-(--ease-out-quart) hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           aria-label="Denarius — início"
         >
           <LogoWordmark className="h-5 w-auto text-foreground" />
@@ -41,7 +41,7 @@ export function LandingHeader() {
         <div className="flex items-center gap-2">
           <a
             href={SIGN_IN_URL}
-            className="hidden rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground lg:inline-block"
+            className="hidden rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring lg:inline-block"
           >
             Entrar
           </a>

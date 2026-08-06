@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { MenuIcon, XIcon } from "lucide-react";
+import { EASE_OUT_QUART, DURATION } from "./motion";
 import { SIGN_IN_URL } from "./links";
 
 type NavLink = { href: string; label: string };
@@ -14,6 +16,7 @@ export function MobileNav({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false);
   const panelId = "menu-mobile";
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     if (!open) return;
@@ -47,37 +50,44 @@ export function MobileNav({ links }: { links: NavLink[] }) {
         )}
       </button>
 
-      {open ? (
-        <div
-          id={panelId}
-          className="absolute inset-x-0 top-full border-b border-border bg-background/95 backdrop-blur-lg"
-        >
-          <nav aria-label="Navegação principal" className="px-6 py-4">
-            <ul className="divide-y divide-border">
-              {links.map((link) => (
-                <li key={link.href}>
+      <AnimatePresence>
+        {open ? (
+          <m.div
+            id={panelId}
+            key="painel"
+            initial={reduced ? false : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduced ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: DURATION.small, ease: EASE_OUT_QUART }}
+            className="absolute inset-x-0 top-full border-b border-border bg-background/95 backdrop-blur-lg"
+          >
+            <nav aria-label="Navegação principal" className="px-6 py-4">
+              <ul className="divide-y divide-border">
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-md py-3 text-sm text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:text-brand-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
                   <a
-                    href={link.href}
+                    href={SIGN_IN_URL}
                     onClick={() => setOpen(false)}
-                    className="block rounded-md py-3 text-sm text-foreground transition-colors hover:text-brand-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                    className="block rounded-md py-3 text-sm text-muted-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                   >
-                    {link.label}
+                    Entrar
                   </a>
                 </li>
-              ))}
-              <li>
-                <a
-                  href={SIGN_IN_URL}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-md py-3 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                >
-                  Entrar
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      ) : null}
+              </ul>
+            </nav>
+          </m.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

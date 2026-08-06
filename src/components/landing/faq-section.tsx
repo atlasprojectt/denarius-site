@@ -1,3 +1,4 @@
+import { FaqItem } from "./faq-item";
 import { Section } from "./section";
 
 const QUESTIONS = [
@@ -69,20 +70,7 @@ export function FAQSection() {
       />
       <div className="divide-y divide-border border-t border-border">
         {QUESTIONS.map((item) => (
-          <details key={item.q} className="group py-4">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-md font-medium marker:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
-              {item.q}
-              <span
-                aria-hidden="true"
-                className="shrink-0 text-lg leading-none text-muted-foreground transition-transform duration-(--duration-standard) ease-(--ease-out-quart) group-open:rotate-45 motion-reduce:transform-none"
-              >
-                +
-              </span>
-            </summary>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
-              {item.a}
-            </p>
-          </details>
+          <FaqItem key={item.q} question={item.q} answer={item.a} />
         ))}
       </div>
     </Section>

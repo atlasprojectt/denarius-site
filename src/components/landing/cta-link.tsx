@@ -1,9 +1,14 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { m } from "motion/react";
+import type { Variants } from "motion/react";
+import { SMALL } from "./motion";
 
 type CtaLinkProps = {
   href: string;
   variant?: "primary" | "secondary";
-  /** Trailing arrow that shifts on hover (UI.md: body stable, arrow moves). */
+  /** Seta que desloca no hover (UI.md: corpo estável, seta se move). */
   arrow?: boolean;
   children: ReactNode;
 };
@@ -17,7 +22,28 @@ const VARIANTS = {
     "border border-border text-foreground hover:bg-accent hover:text-accent-foreground",
 } as const;
 
-/** Shared CTA anchor styled as a button, using the Denarius brand tokens. */
+/**
+ * O corpo do botão. Só o primário sobe, e no máximo 1px; o `tap` devolve à
+ * posição original, como o UI.md pede. Os nomes de variante são o que permite a
+ * seta reagir ao hover do pai.
+ */
+const body = (lift: boolean): Variants => ({
+  rest: { y: 0 },
+  hover: { y: lift ? -1 : 0 },
+  tap: { y: 0 },
+});
+
+/** A seta desloca 2px — o único elemento que se move em ambos os variantes. */
+const arrowMotion: Variants = {
+  rest: { x: 0 },
+  hover: { x: 2 },
+  tap: { x: 2 },
+};
+
+/**
+ * CTA compartilhado. O movimento segue os limites do UI.md: corpo estável,
+ * elevação de no máximo 1px, seta deslocando 2px, sem escala e sem glow.
+ */
 export function CtaLink({
   href,
   variant = "primary",
@@ -25,16 +51,27 @@ export function CtaLink({
   children,
 }: CtaLinkProps) {
   return (
-    <a href={href} className={`${BASE} ${VARIANTS[variant]}`}>
+    <m.a
+      href={href}
+      className={`${BASE} ${VARIANTS[variant]}`}
+      variants={body(variant === "primary")}
+      initial="rest"
+      whileHover="hover"
+      whileFocus="hover"
+      whileTap="tap"
+      transition={SMALL}
+    >
       {children}
       {arrow ? (
-        <span
+        <m.span
           aria-hidden="true"
-          className="transition-transform duration-(--duration-standard) ease-(--ease-out-quart) group-hover:translate-x-0.5 motion-reduce:transform-none"
+          variants={arrowMotion}
+          transition={SMALL}
+          className="inline-block"
         >
           →
-        </span>
+        </m.span>
       ) : null}
-    </a>
+    </m.a>
   );
 }

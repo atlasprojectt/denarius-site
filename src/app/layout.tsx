@@ -64,6 +64,15 @@ export default function RootLayout({
         geistMono.variable,
       )}
     >
+      <head>
+        {/* Os blocos com entrada animada são renderizados em `opacity: 0` e o
+            Motion os revela na hidratação. Sem JavaScript não haveria quem os
+            revelasse, então aqui o estado escondido é anulado — conteúdo nunca
+            depende de script para ser lido. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

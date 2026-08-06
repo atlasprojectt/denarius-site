@@ -1,3 +1,4 @@
+import { Reveal } from "./reveal";
 import { Section } from "./section";
 import { WaitlistForm } from "./waitlist-form";
 
@@ -19,7 +20,7 @@ export function WaitlistSection() {
       spacious
     >
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
+        <Reveal>
           <p className="text-base leading-8 text-muted-foreground sm:text-lg">
             Estamos liberando acesso aos poucos para empresas de tecnologia de
             20 a 200 pessoas. Deixe seu e-mail e entramos em contato com as
@@ -40,11 +41,14 @@ export function WaitlistSection() {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
 
-        <div className="rounded-xl border border-border bg-background p-6 sm:p-8 lg:self-start">
+        <Reveal
+          delay={0.1}
+          className="rounded-xl border border-border bg-background p-6 sm:p-8 lg:self-start"
+        >
           <WaitlistForm />
-        </div>
+        </Reveal>
       </div>
     </Section>
   );

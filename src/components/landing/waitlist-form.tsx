@@ -1,6 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
+import { EASE_OUT_QUART, DURATION, SMALL } from "./motion";
 import { WAITLIST_ENABLED, isValidEmail, submitWaitlist } from "./waitlist";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -19,6 +21,7 @@ export function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const reduced = useReducedMotion();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,8 +47,11 @@ export function WaitlistForm() {
 
   if (status === "success") {
     return (
-      <div
+      <m.div
         role="status"
+        initial={reduced ? false : { opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: DURATION.reveal, ease: EASE_OUT_QUART }}
         className="rounded-xl border border-brand-accent-border bg-brand-accent-muted p-6"
       >
         <p className="font-medium">E-mail registrado.</p>
@@ -53,7 +59,7 @@ export function WaitlistForm() {
           Entramos em contato com o acesso assim que abrirmos a próxima leva de
           testes. Você não precisa fazer mais nada.
         </p>
-      </div>
+      </m.div>
     );
   }
 
@@ -92,28 +98,46 @@ export function WaitlistForm() {
           className="h-11 min-w-0 flex-1 rounded-lg border border-input bg-background px-3.5 text-sm text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) placeholder:text-muted-foreground focus-visible:border-brand-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-60 aria-invalid:border-destructive"
         />
 
-        <button
+        <m.button
           type="submit"
           disabled={status === "submitting"}
+          variants={{ rest: { y: 0 }, hover: { y: -1 }, tap: { y: 0 } }}
+          initial="rest"
+          whileHover={status === "submitting" ? undefined : "hover"}
+          whileFocus={status === "submitting" ? undefined : "hover"}
+          whileTap="tap"
+          transition={SMALL}
           className="group inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-70"
         >
           {status === "submitting" ? "Enviando…" : "Entrar na lista"}
-          <span
+          <m.span
             aria-hidden="true"
-            className="transition-transform duration-(--duration-standard) ease-(--ease-out-quart) group-hover:translate-x-0.5 motion-reduce:transform-none"
+            variants={{ rest: { x: 0 }, hover: { x: 2 }, tap: { x: 2 } }}
+            transition={SMALL}
+            className="inline-block"
           >
             →
-          </span>
-        </button>
+          </m.span>
+        </m.button>
       </div>
 
-      <p aria-live="polite" className="min-h-5">
-        {hasError ? (
-          <span id={errorId} className="mt-2 block text-sm text-destructive">
-            {error}
-          </span>
-        ) : null}
-      </p>
+      <div aria-live="polite" className="min-h-5">
+        <AnimatePresence>
+          {hasError ? (
+            <m.p
+              id={errorId}
+              key="erro"
+              initial={reduced ? false : { opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? undefined : { opacity: 0, y: -4 }}
+              transition={SMALL}
+              className="mt-2 text-sm text-destructive"
+            >
+              {error}
+            </m.p>
+          ) : null}
+        </AnimatePresence>
+      </div>
 
       <p className="mt-1 text-xs leading-5 text-muted-foreground">
         Usamos seu e-mail apenas para liberar o acesso e falar sobre o teste.

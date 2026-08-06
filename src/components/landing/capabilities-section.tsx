@@ -1,4 +1,5 @@
 import { AssetSlot } from "./asset-slot";
+import { Reveal } from "./reveal";
 import { Section } from "./section";
 
 type CopyProps = {
@@ -50,7 +51,7 @@ export function CapabilitiesSection() {
       intro="Três funções que se apoiam umas nas outras: o orçamento dá o limite, a atribuição explica a composição, e o aviso chega enquanto ainda cabe uma decisão."
     >
       {/* 01 — texto à esquerda, o card de orçamento à direita. */}
-      <div className="grid items-center gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16">
+      <Reveal className="grid items-center gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16">
         <CapabilityCopy
           index="01 · Governar"
           title="Cada gasto medido contra um limite."
@@ -66,10 +67,10 @@ export function CapabilitiesSection() {
           ratio="3 / 2"
           brief="Gasto do mês contra o orçamento, a barra de ritmo com o marcador de dia decorrido e a projeção de fechamento."
         />
-      </div>
+      </Reveal>
 
       {/* 02 — inverte: a composição por fonte à esquerda, o texto à direita. */}
-      <div className="mt-20 grid items-center gap-10 sm:mt-24 lg:grid-cols-[3fr_2fr] lg:gap-16">
+      <Reveal className="mt-20 grid items-center gap-10 sm:mt-24 lg:grid-cols-[3fr_2fr] lg:gap-16">
         <AssetSlot
           id="composicao-fonte"
           ratio="3 / 2"
@@ -88,10 +89,10 @@ export function CapabilitiesSection() {
             ]}
           />
         </div>
-      </div>
+      </Reveal>
 
       {/* 03 — texto em coluna estreita e a tabela de times ocupando a largura. */}
-      <div className="mt-20 sm:mt-24">
+      <Reveal className="mt-20 sm:mt-24">
         <div className="max-w-2xl">
           <CapabilityCopy
             index="03 · Agir"
@@ -110,7 +111,7 @@ export function CapabilitiesSection() {
           brief="Tabela de times com os três estados de orçamento — estourado, atenção e no controle — e as colunas de gasto, orçamento e projeção."
           className="mt-10"
         />
-      </div>
+      </Reveal>
     </Section>
   );
 }

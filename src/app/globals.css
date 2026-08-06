@@ -134,13 +134,18 @@
     cursor: pointer;
   }
 
-  /* Motion is decorative here — never required to read the page. */
+  /* Motion is decorative here — never required to read the page.
+     `animation-timeline` also has to be reset: for a scroll-driven animation
+     the duration is ignored, so zeroing it would not stop the movement. The
+     Motion library is handled separately, by `reducedMotion="user"` in
+     `motion-provider.tsx`. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
+      animation-timeline: auto !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
