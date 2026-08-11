@@ -50,7 +50,7 @@ const VARIANTS = {
   primary: "bg-primary text-primary-foreground hover:bg-primary-hover",
   /* Preenchido, não contornado: no moodboard o botão secundário tem corpo. */
   secondary:
-    "border border-border bg-secondary text-foreground hover:bg-secondary-hover",
+    "bg-secondary text-foreground hover:bg-secondary-hover",
 } as const;
 
 /**

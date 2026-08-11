@@ -27,7 +27,7 @@ export function LandingHeader() {
       </a>
 
       <nav aria-label="Navegação principal" className="hidden lg:block">
-        <ul className="flex items-center gap-1 text-sm text-muted-foreground">
+        <ul className="flex items-center gap-1 text-sm text-foreground/75">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
@@ -44,7 +44,7 @@ export function LandingHeader() {
       <div className="flex items-center gap-2">
         <a
           href={SIGN_IN_URL}
-          className="hidden rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-foreground/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring lg:inline-block"
+          className="hidden rounded-md px-3 py-2 text-sm text-foreground/75 transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-foreground/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring lg:inline-block"
         >
           Entrar
         </a>

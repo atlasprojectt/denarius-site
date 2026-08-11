@@ -44,13 +44,13 @@ export function HeroSection() {
           className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl"
         >
           <Image
-            src="/hero-backdrop.jpg"
+            src="/hero-backdrop-56.png"
             alt=""
             fill
             preload
             quality={100}
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-[60%_center]"
           />
         </div>
 
@@ -105,7 +105,7 @@ export function HeroSection() {
             {...item}
             className="mx-auto -mb-16 w-full max-w-[1480px] px-6 pt-16 sm:-mb-40 sm:px-12 sm:pt-20 lg:-mb-56 lg:px-20"
           >
-            <div className="overflow-hidden rounded-xl border border-foreground/15">
+            <div className="overflow-hidden rounded-xl border border-foreground/10">
               <Image
                 src="/hero-dashboard.png"
                 alt="Painel do Denarius: veredito de estouro do time de Engenharia, gasto do mês contra o orçamento com projeção de fechamento, gasto por fonte e a tabela de orçamento dos times."

@@ -50,9 +50,9 @@ export function HeaderShell({ children }: { children: ReactNode }) {
         className={cn(
           // A borda existe nos dois estados — no topo ela é só transparente —
           // para que a barra não mude de altura quando o estado vira.
-          "mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 rounded-2xl border px-6 transition-colors duration-(--duration-standard) ease-(--ease-out-quart)",
+          "relative mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 rounded-2xl border px-6 transition-colors duration-(--duration-standard) ease-(--ease-out-quart)",
           scrolled
-            ? "border-foreground/10 bg-background/70 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60"
+            ? "border-foreground/5 bg-background/70 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60"
             : "border-transparent bg-transparent",
         )}
       >

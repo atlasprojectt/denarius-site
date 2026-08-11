@@ -12,9 +12,10 @@ export function WaitlistSection() {
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:py-20 lg:py-24 xl:px-6">
         <Reveal className="relative min-h-96 w-full overflow-hidden rounded-3xl border border-border">
           <Image
-            src="/hero-backdrop.jpg"
+            src="/hero-backdrop-56.png"
             alt=""
             fill
+            quality={100}
             sizes="(min-width: 1280px) 1104px, calc(100vw - 32px)"
             className="object-cover object-center"
           />

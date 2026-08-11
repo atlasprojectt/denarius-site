@@ -53,7 +53,7 @@ export function WaitlistDialog({ trigger }: { trigger: ReactNode }) {
               secondaryAction={
                 /* Par "Começar / Cancelar" do moodboard: os dois com corpo e o
                    mesmo raio, o secundário subordinado pela cor, não pelo peso. */
-                <Dialog.Close className="inline-flex h-11 items-center justify-center rounded-lg border border-border bg-secondary px-5 text-sm font-medium text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-secondary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+                <Dialog.Close className="inline-flex h-11 items-center justify-center rounded-lg bg-secondary px-5 text-sm font-medium text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-secondary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
                   Cancelar
                 </Dialog.Close>
               }
