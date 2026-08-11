@@ -10,20 +10,17 @@ const STATES = [
   {
     status: "Sob controle",
     bar: "bg-status-green",
-    example: "No ritmo — projeção de R$ 3.100 abaixo do orçamento.",
-    meaning: "A projeção de fechamento cabe dentro do limite.",
+    example: "Projeção de R$ 3.100 abaixo do orçamento.",
   },
   {
     status: "Atenção",
     bar: "bg-status-amber",
-    example: "Projeção de R$ 4.200 acima do orçamento no fechamento.",
-    meaning: "Ainda não estourou, mas o ritmo atual leva a isso.",
+    example: "No ritmo atual, o mês fecha R$ 4.200 acima.",
   },
   {
     status: "Acima do orçamento",
     bar: "bg-status-red",
-    example: "Engenharia ultrapassou o limite em 25%.",
-    meaning: "Um time já passou do próprio limite neste período.",
+    example: "Engenharia já ultrapassou o limite em 25%.",
   },
 ];
 
@@ -37,23 +34,20 @@ export function VerdictSection() {
     <Section
       id="veredito"
       eyebrow="A resposta"
-      title="Os gastos com IA estão sob controle?"
-      intro="O painel abre com a resposta em uma frase, antes de qualquer gráfico. A frase é calculada a partir do gasto do mês, do orçamento, do tempo decorrido e da projeção de fechamento — nenhum número dela é escrito à mão."
+      title="O seu gasto com IA está sob controle?"
+      intro="Custos de APIs e assinaturas ficam espalhados. O Denarius compara gasto, orçamento e ritmo do mês para responder: sob controle, atenção ou acima do limite."
       emphasis="statement"
-      surface="raised"
       spacious
+      rule
     >
       <Reveal>
         <figure>
           <AssetSlot
             id="veredito-barra"
-            ratio="16 / 3"
-            brief="A barra que abre o painel: o ponto de status, a frase do veredito, a ação para o time citado e o carimbo da última sincronização."
+            ratio="16 / 9"
+            brief="A barra do veredito, com status, frase, ação recomendada e data da última sincronização."
+            dimensions="1600 × 900 px"
           />
-          <figcaption className="mt-4 text-sm text-muted-foreground">
-            A primeira linha do painel. Ao lado dela, a data da última
-            sincronização — para que o número nunca apareça sem contexto.
-          </figcaption>
         </figure>
       </Reveal>
 
@@ -64,11 +58,8 @@ export function VerdictSection() {
               aria-hidden="true"
               className={`block h-0.5 w-12 rounded-full ${state.bar}`}
             />
-            <dt className="mt-4 text-lg font-medium">{state.status}</dt>
-            <dd className="mt-2 text-sm leading-6 text-muted-foreground">
-              {state.meaning}
-            </dd>
-            <dd className="mt-4 border-l border-border pl-4 text-sm leading-6 text-foreground/90">
+            <dt className="mt-4 text-lg font-normal">{state.status}</dt>
+            <dd className="explainer mt-2 text-sm text-muted-foreground">
               {state.example}
             </dd>
           </Reveal>

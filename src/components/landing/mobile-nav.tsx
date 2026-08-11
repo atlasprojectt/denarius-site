@@ -41,7 +41,8 @@ export function MobileNav({ links }: { links: NavLink[] }) {
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Fechar menu" : "Abrir menu"}
-        className="inline-flex size-10 items-center justify-center rounded-lg border border-border text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        /* Botão de ícone isolado: círculo, como manda o UI.md. */
+        className="inline-flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-foreground/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         {open ? (
           <XIcon aria-hidden="true" className="size-5" />

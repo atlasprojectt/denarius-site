@@ -1,117 +1,148 @@
 import { AssetSlot } from "./asset-slot";
+import { CapabilityCard } from "./capability-card";
+import { CtaLink } from "./cta-link";
 import { Reveal } from "./reveal";
 import { Section } from "./section";
-
-type CopyProps = {
-  index: string;
-  title: string;
-  description: string;
-  points: string[];
-};
-
-/** Bloco de texto compartilhado pelas três capacidades. */
-function CapabilityCopy({ index, title, description, points }: CopyProps) {
-  return (
-    <div>
-      <p className="font-mono text-xs tracking-widest text-brand-accent-light">
-        {index}
-      </p>
-      <h3 className="mt-3 text-xl font-medium tracking-tight sm:text-2xl">
-        {title}
-      </h3>
-      <p className="mt-4 text-base leading-7 text-muted-foreground">
-        {description}
-      </p>
-      <ul className="mt-6 space-y-3">
-        {points.map((point) => (
-          <li key={point} className="flex gap-3 text-sm leading-6">
-            <span
-              aria-hidden="true"
-              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-accent"
-            />
-            {point}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+import { WAITLIST_ANCHOR } from "./links";
 
 /**
- * As três capacidades, cada uma com uma composição própria e um recorte real
- * do produto ao lado da afirmação que ele sustenta. A variação de layout é
- * proposital: três blocos idênticos alternando de lado leem como preenchimento.
+ * O fluxo de adoção, que antes ocupava uma seção inteira. Como argumento ele
+ * cabe em três linhas: o que você conecta, o que você define e o que acontece
+ * todo dia. Em seção própria, ele repetia o produto em outra ordem.
+ */
+const STEPS = [
+  {
+    title: "Conecte",
+    text: "OpenAI, Anthropic, assinaturas e times.",
+  },
+  {
+    title: "Defina",
+    text: "Crie limites para a empresa e para cada time.",
+  },
+  {
+    title: "Acompanhe",
+    text: "Receba o veredito e os alertas diariamente.",
+  },
+];
+
+/**
+ * As três capacidades, cada uma num card com o recorte do produto ao lado da
+ * afirmação que ele sustenta.
+ *
+ * Os cards são idênticos em superfície, medida, proporção e espaçamento. O
+ * ritmo vem só da alternância do lado do visual — variar também cor e formato
+ * fazia a pilha ler como três componentes sem parentesco.
  */
 export function CapabilitiesSection() {
   return (
     <Section
       id="produto"
       eyebrow="O que o produto faz"
-      title="Governar, entender e agir sobre o mesmo número."
-      intro="Três funções que se apoiam umas nas outras: o orçamento dá o limite, a atribuição explica a composição, e o aviso chega enquanto ainda cabe uma decisão."
+      title="Do gasto disperso à decisão."
+      intro="Veja onde o dinheiro está, como o mês deve fechar e o que precisa de atenção."
+      surface="raised"
     >
-      {/* 01 — texto à esquerda, o card de orçamento à direita. */}
-      <Reveal className="grid items-center gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16">
-        <CapabilityCopy
-          index="01 · Governar"
-          title="Cada gasto medido contra um limite."
-          description="Você define o orçamento da empresa e o de cada time. O consumo é comparado a esses limites todos os dias, junto do tempo já decorrido do período — porcentagem de orçamento sem contexto de tempo não diz muita coisa."
-          points={[
-            "Orçamento da empresa e dos times como limites independentes",
-            "Gasto e ritmo lidos contra o tempo decorrido do período",
-            "Projeção de fechamento e margem em dinheiro, não só em porcentagem",
-          ]}
-        />
-        <AssetSlot
-          id="orcamento-mes"
-          ratio="3 / 2"
-          brief="Gasto do mês contra o orçamento, a barra de ritmo com o marcador de dia decorrido e a projeção de fechamento."
-        />
-      </Reveal>
-
-      {/* 02 — inverte: a composição por fonte à esquerda, o texto à direita. */}
-      <Reveal className="mt-20 grid items-center gap-10 sm:mt-24 lg:grid-cols-[3fr_2fr] lg:gap-16">
-        <AssetSlot
-          id="composicao-fonte"
-          ratio="3 / 2"
-          brief="Gasto por fonte em lista ordenada — provedores e assinaturas com valor e percentual — e a linha de gasto sem atribuição com a ação de atribuir."
-          className="lg:order-1"
-        />
-        <div className="lg:order-2">
-          <CapabilityCopy
-            index="02 · Entender"
-            title="Saiba para onde o dinheiro está indo."
-            description="O custo é distribuído por time, provedor e modelo. Uso de API e assinaturas registradas entram na mesma conta, e o que não dá para mapear aparece explicitamente em vez de sumir do relatório."
-            points={[
-              "Atribuição por time, provedor e modelo",
-              "Categoria “Não atribuído” — o total sempre bate com a soma das partes",
-              "Uso de API e assinaturas dentro do mesmo orçamento",
-            ]}
+      {/* Três cards horizontais empilhados. Só o lado do visual alterna — a
+          proporção do recorte é a mesma nos três, senão a pilha perde o prumo.
+          O `16 / 7` que o terceiro usava era o que mais destoava. */}
+      <div className="grid gap-8">
+        <Reveal>
+          <CapabilityCard
+            mediaSide="right"
+            eyebrow="01 · Governar"
+            title="Orçamento no ritmo do mês."
+            description="Compare gasto, limite e dias decorridos. Veja a projeção antes da fatura."
+            media={
+              <AssetSlot
+                id="orcamento-mes"
+                ratio="3 / 2"
+                brief="Gasto do mês, orçamento, marcador do dia e projeção de fechamento."
+                dimensions="1600 × 1067 px"
+                bare
+              />
+            }
           />
-        </div>
-      </Reveal>
+        </Reveal>
 
-      {/* 03 — texto em coluna estreita e a tabela de times ocupando a largura. */}
-      <Reveal className="mt-20 sm:mt-24">
-        <div className="max-w-2xl">
-          <CapabilityCopy
-            index="03 · Agir"
-            title="Encontre os poucos riscos que exigem decisão."
-            description="Quando um time está a caminho de passar do limite, o aviso chega antes da fatura, com o que está por trás do aumento. Antes de decidir, dá para simular um ajuste de ritmo e ver o efeito no fechamento."
-            points={[
-              "Aviso antecipado quando o estouro é projetado, não só quando acontece",
-              "Principais responsáveis pelo aumento e o que investigar primeiro",
-              "Simulação de ritmo com recálculo imediato de fechamento e margem",
-            ]}
+        <Reveal>
+          <CapabilityCard
+            mediaSide="left"
+            eyebrow="02 · Entender"
+            title="Cada custo com seu responsável."
+            description="Distribua APIs e assinaturas por time, provedor e modelo. Valores sem origem continuam visíveis."
+            media={
+              <AssetSlot
+                id="composicao-fonte"
+                ratio="3 / 2"
+                brief="Provedores, assinaturas, valores e a linha de gasto não atribuído."
+                dimensions="1600 × 1067 px"
+                bare
+              />
+            }
           />
-        </div>
-        <AssetSlot
-          id="orcamento-times"
-          ratio="16 / 7"
-          brief="Tabela de times com os três estados de orçamento — estourado, atenção e no controle — e as colunas de gasto, orçamento e projeção."
-          className="mt-10"
-        />
-      </Reveal>
+        </Reveal>
+
+        {/* O terceiro fecha a seção, então é o que carrega a chamada. */}
+        <Reveal>
+          <CapabilityCard
+            mediaSide="right"
+            eyebrow="03 · Agir"
+            title="Riscos priorizados para agir."
+            description="Identifique times fora do ritmo, os maiores custos e o efeito de possíveis ajustes."
+            action={
+              <CtaLink
+                href={WAITLIST_ANCHOR}
+                variant="secondary"
+                size="sm"
+                arrow
+              >
+                Entrar na lista de acesso
+              </CtaLink>
+            }
+            media={
+              <AssetSlot
+                id="orcamento-times"
+                ratio="3 / 2"
+                brief="Times com status, gasto, orçamento e projeção de fechamento."
+                dimensions="1600 × 1067 px"
+                bare
+              />
+            }
+          />
+        </Reveal>
+      </div>
+
+      {/* O fluxo fecha a seção: depois de ver o que o produto faz, a pergunta
+          seguinte é o que custa adotá-lo. */}
+      <div className="mt-20 border-t border-border pt-12 sm:mt-24">
+        <Reveal>
+          <h3 className="text-xl font-normal tracking-tight sm:text-2xl">
+            E você não muda nada do que já está funcionando.
+          </h3>
+          <p className="explainer mt-4 max-w-2xl text-muted-foreground">
+            O Denarius lê metadados e não fica no caminho das suas requisições.
+          </p>
+        </Reveal>
+
+        <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-10">
+          {STEPS.map((step, index) => (
+            <Reveal
+              key={step.title}
+              as="li"
+              delay={index * 0.08}
+              className="border-t border-(--frame-line) pt-5"
+            >
+              <p className="font-mono text-xs tracking-widest text-brand-accent-light">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <h4 className="mt-2 text-lg font-normal">{step.title}</h4>
+              <p className="explainer mt-2 text-sm text-muted-foreground">
+                {step.text}
+              </p>
+            </Reveal>
+          ))}
+        </ol>
+      </div>
     </Section>
   );
 }

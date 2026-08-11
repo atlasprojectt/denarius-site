@@ -1,16 +1,26 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist_Mono } from "next/font/google";
+import { DM_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+/**
+ * Poppins carrega os títulos; DM Mono, os textos explicativos e os rótulos.
+ *
+ * Nenhuma das duas é variable font no Google Fonts, então os pesos precisam ser
+ * declarados um a um — e DM Mono só existe em 300/400/500, não há negrito.
+ */
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
 });
 
 const TITLE = "Denarius — Governança de gastos com IA";
@@ -60,8 +70,8 @@ export default function RootLayout({
         "h-full",
         "antialiased",
         "font-sans",
-        dmSans.variable,
-        geistMono.variable,
+        poppins.variable,
+        dmMono.variable,
       )}
     >
       <head>

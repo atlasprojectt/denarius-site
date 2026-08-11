@@ -25,7 +25,11 @@ export function isValidEmail(value: string): boolean {
 
 export type WaitlistResult = { ok: true } | { ok: false; message: string };
 
-export async function submitWaitlist(email: string): Promise<WaitlistResult> {
+export type WaitlistEntry = { name: string; email: string };
+
+export async function submitWaitlist({
+  email,
+}: WaitlistEntry): Promise<WaitlistResult> {
   if (!isValidEmail(email)) {
     return { ok: false, message: "Confira o e-mail digitado." };
   }

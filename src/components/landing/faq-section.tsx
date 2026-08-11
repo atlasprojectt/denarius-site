@@ -1,46 +1,47 @@
 import { FaqItem } from "./faq-item";
+import { Reveal } from "./reveal";
 import { Section } from "./section";
 
 const QUESTIONS = [
   {
     q: "Como funciona a lista de acesso?",
-    a: "O acesso está sendo liberado aos poucos. Você deixa o e-mail e entramos em contato quando abrirmos a próxima leva de testes, com as instruções para conectar sua conta.",
+    a: "Você deixa nome e e-mail. Liberamos o acesso por etapas e entramos em contato com as instruções para conectar a conta.",
   },
   {
     q: "O Denarius bloqueia o uso de IA?",
-    a: "Não. O Denarius é somente leitura. Ele governa por visibilidade, avisos antecipados e recomendações — nunca bloqueia nem altera o uso dos provedores. Agir sobre um aviso é sempre decisão sua.",
+    a: "Não. O Denarius é somente leitura: mostra riscos e recomenda ações, mas nunca bloqueia ou altera o uso.",
   },
   {
     q: "O Denarius armazena prompts ou respostas?",
-    a: "Não. Ele guarda apenas metadados de uso: contagem de tokens, custo, modelo e identificadores. Prompts e respostas nunca chegam até ele, porque o tráfego de IA não passa pelo produto.",
+    a: "Não. Ele armazena apenas metadados de uso, como tokens, custo, modelo e identificadores.",
   },
   {
     q: "Como os custos são atribuídos aos times?",
-    a: "Pela estrutura que você já tem: projetos da OpenAI e workspaces da Anthropic mapeiam para times; chaves e usuários mapeiam para pessoas pela lista de colaboradores. Chaves compartilhadas somam ao time responsável, não a um indivíduo.",
+    a: "Projetos, workspaces, chaves e usuários são ligados aos times pela sua estrutura. Chaves compartilhadas ficam no time responsável.",
   },
   {
     q: "Os orçamentos da empresa e dos times podem ser diferentes?",
-    a: "Sim. O orçamento da empresa e os de cada time são limites independentes. Cada um é acompanhado com seu próprio gasto, ritmo, projeção e avisos.",
+    a: "Sim. Empresa e times têm limites, projeções e alertas independentes.",
   },
   {
     q: "Com que frequência os dados são atualizados?",
-    a: "Uma vez por dia, com uma sincronização imediata assim que você conecta um provedor. Cada número na tela mostra quando foi atualizado, e sincronizações atrasadas são sinalizadas.",
+    a: "Uma vez por dia, além da primeira sincronização ao conectar o provedor. A tela mostra quando os dados foram atualizados.",
   },
   {
     q: "O que acontece com gastos não atribuídos?",
-    a: "Vão para uma categoria explícita de “Não atribuído”, em vez de desaparecer. O total da empresa sempre equivale à soma dos times mais o não atribuído, e o produto sugere mapear o que está ali.",
+    a: "O valor aparece como “Não atribuído” e continua no total da empresa até você mapear a origem.",
   },
   {
     q: "É possível ocultar nomes individuais?",
-    a: "Sim. Os nomes são visíveis apenas para administradores por padrão, e o armazenamento por pessoa pode ser desligado por completo, mantendo tudo no nível de time.",
+    a: "Sim. Nomes ficam restritos a administradores e o dado individual pode ser desativado.",
   },
   {
     q: "Quais provedores são compatíveis?",
-    a: "OpenAI e Anthropic são as integrações medidas nesta versão. Assinaturas e assentos de outras ferramentas de IA podem ser cadastrados manualmente e entram no mesmo orçamento.",
+    a: "OpenAI e Anthropic nesta versão. Outras assinaturas podem ser cadastradas manualmente.",
   },
   {
     q: "Como funciona a cobrança?",
-    a: "Mensalidade fixa, definida pela faixa de tamanho da empresa — não há cobrança por token nem por volume de gasto acompanhado. A contratação é conduzida pela nossa equipe, então o valor é fechado na conversa.",
+    a: "Mensalidade fixa por faixa de tamanho da empresa. A contratação é feita diretamente com nossa equipe.",
   },
 ];
 
@@ -60,17 +61,22 @@ export function FAQSection() {
     <Section
       id="perguntas-frequentes"
       eyebrow="Perguntas frequentes"
-      title="O que costumam perguntar antes de conectar."
+      title="O que perguntam antes de conectar."
       emphasis="quiet"
       narrow
+      surface="raised"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
       />
+      {/* O atraso tem teto em quatro posições: são dez perguntas, e escalonar
+          todas deixaria a última esperando quase meio segundo para aparecer. */}
       <div className="divide-y divide-border border-t border-border">
-        {QUESTIONS.map((item) => (
-          <FaqItem key={item.q} question={item.q} answer={item.a} />
+        {QUESTIONS.map((item, index) => (
+          <Reveal key={item.q} delay={Math.min(index, 4) * 0.04}>
+            <FaqItem question={item.q} answer={item.a} />
+          </Reveal>
         ))}
       </div>
     </Section>

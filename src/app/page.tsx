@@ -1,19 +1,21 @@
 import { CapabilitiesSection } from "@/components/landing/capabilities-section";
 import { FAQSection } from "@/components/landing/faq-section";
 import { HeroSection } from "@/components/landing/hero-section";
-import { HowItWorksSection } from "@/components/landing/how-it-works-section";
 import { LandingFooter } from "@/components/landing/landing-footer";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { MotionProvider } from "@/components/landing/motion-provider";
-import { ProblemSection } from "@/components/landing/problem-section";
 import { TrustSection } from "@/components/landing/trust-section";
 import { VerdictSection } from "@/components/landing/verdict-section";
 import { WaitlistSection } from "@/components/landing/waitlist-section";
 
 /**
- * A narrativa da página, em ordem: o problema de controle, a resposta que o
- * produto dá, a prova de que ele dá essa resposta, como ele entra no fluxo
- * atual, por que é seguro conectar, as objeções restantes e o próximo passo.
+ * A narrativa vai direto ao produto: a resposta que ele dá, o que ele faz e
+ * como entra no fluxo, por que é seguro conectar, as objeções restantes e o
+ * próximo passo.
+ *
+ * O problema não tem seção própria — ele fica subentendido na abertura do
+ * veredito. Construí-lo em uma seção inteira antes de mostrar qualquer coisa
+ * atrasava o produto e fazia a página ler como defesa de tese.
  */
 export default function Home() {
   return (
@@ -22,10 +24,8 @@ export default function Home() {
         <LandingHeader />
         <main className="flex-1">
           <HeroSection />
-          <ProblemSection />
           <VerdictSection />
           <CapabilitiesSection />
-          <HowItWorksSection />
           <TrustSection />
           <FAQSection />
           <WaitlistSection />

@@ -11,10 +11,9 @@ const COLUMNS = [
   {
     heading: "Produto",
     links: [
-      { href: "#problema", label: "O problema" },
       { href: "#produto", label: "Produto" },
-      { href: "#como-funciona", label: "Como funciona" },
       { href: "#confianca", label: "Confiança" },
+      { href: "#perguntas-frequentes", label: "Perguntas" },
     ],
   },
   {
@@ -36,7 +35,13 @@ const COLUMNS = [
 
 export function LandingFooter() {
   return (
-    <footer className="border-t border-border">
+    /* Exatamente o cinza da seção `raised` (ver `SURFACE` em `section.tsx`):
+       o rodapé é a mesma superfície, não um bloco de cor própria. Aqui o cinza
+       atravessa a tela inteira, como o traço — o rodapé fecha a página inteiro.
+
+       A régua no topo usa a linha da moldura, o mesmo traço que separa as
+       seções: o rodapé fecha a página com a marca com que ela foi dividida. */
+    <footer className="border-t border-(--frame-line) bg-card">
       <div className="mx-auto w-full max-w-6xl px-6 py-12">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2 lg:col-span-1">
@@ -65,7 +70,7 @@ export function LandingFooter() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Denarius</p>
           <ul className="flex gap-6">
             <li>

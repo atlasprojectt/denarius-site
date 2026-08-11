@@ -1,55 +1,44 @@
+import Image from "next/image";
+import { CtaLink } from "./cta-link";
 import { Reveal } from "./reveal";
-import { Section } from "./section";
-import { WaitlistForm } from "./waitlist-form";
-
-/** O que aparece primeiro quando a conta é conectada. */
-const FIRST_ANSWERS = [
-  "Para onde o dinheiro está indo",
-  "Como o mês deve fechar",
-  "O que exige atenção agora",
-];
+import { WaitlistDialog } from "./waitlist-dialog";
 
 export function WaitlistSection() {
   return (
-    <Section
-      id="lista-de-acesso"
-      eyebrow="Lista de acesso"
-      title="Traga o gasto de IA da sua empresa para dentro de um orçamento."
-      emphasis="statement"
-      surface="raised"
-      spacious
-    >
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <Reveal>
-          <p className="text-base leading-8 text-muted-foreground sm:text-lg">
-            Estamos liberando acesso aos poucos para empresas de tecnologia de
-            20 a 200 pessoas. Deixe seu e-mail e entramos em contato com as
-            instruções para conectar a sua conta.
-          </p>
+    <section id="lista-de-acesso" className="border-t border-(--frame-line)">
+      {/* O card tem exatamente a largura da moldura, então ele se encaixa nela
+          em vez de flutuar solto — o traço continua acima e abaixo, e o card
+          ocupa o vão. É o que mantém a linha viva até o rodapé. */}
+      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:py-20 lg:py-24 xl:px-6">
+        <Reveal className="relative min-h-96 w-full overflow-hidden rounded-3xl border border-border">
+          <Image
+            src="/hero-backdrop.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 1104px, calc(100vw - 32px)"
+            className="object-cover object-center"
+          />
+          <div aria-hidden className="absolute inset-0 bg-background/35" />
 
-          <p className="mt-8 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            O que você vê primeiro
-          </p>
-          <ul className="mt-4 space-y-3">
-            {FIRST_ANSWERS.map((answer) => (
-              <li key={answer} className="flex gap-3 text-sm leading-6">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-accent"
-                />
-                {answer}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-
-        <Reveal
-          delay={0.1}
-          className="rounded-xl border border-border bg-background p-6 sm:p-8 lg:self-start"
-        >
-          <WaitlistForm />
+          <div className="relative flex min-h-96 flex-col items-center justify-center px-6 py-16 text-center sm:px-10">
+            <p className="font-mono text-xs uppercase tracking-widest text-brand-accent-light">
+              Lista de acesso
+            </p>
+            <h2 className="mt-4 max-w-3xl text-balance text-3xl font-normal tracking-tight sm:text-4xl">
+              Controle o gasto com IA antes da fatura.
+            </h2>
+            <p className="explainer mt-5 max-w-xl text-foreground/70">
+              Entre na lista de acesso para reunir custos, orçamentos e
+              projeções em uma única visão.
+            </p>
+            <div className="mt-8">
+              <WaitlistDialog
+                trigger={<CtaLink arrow>Entrar na lista de acesso</CtaLink>}
+              />
+            </div>
+          </div>
         </Reveal>
       </div>
-    </Section>
+    </section>
   );
 }
