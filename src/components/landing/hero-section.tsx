@@ -84,7 +84,7 @@ export function HeroSection() {
                 {/* Mesmo destino do botão do header: os dois abrem o modal, para
                     que "Entrar na lista" signifique a mesma coisa na página toda. */}
                 <WaitlistDialog
-                  trigger={<CtaLink arrow>Entrar na lista de acesso</CtaLink>}
+                  trigger={<CtaLink arrow glare>Entrar na lista de acesso</CtaLink>}
                 />
                 <CtaLink href="#produto" variant="secondary">
                   Ver como funciona
@@ -120,6 +120,7 @@ export function HeroSection() {
                   width={3804}
                   height={2028}
                   preload
+                  quality={100}
                   sizes="(min-width: 1640px) 1320px, (min-width: 1024px) calc(100vw - 192px), (min-width: 640px) calc(100vw - 128px), calc(100vw - 80px)"
                   className="h-auto w-full"
                 />

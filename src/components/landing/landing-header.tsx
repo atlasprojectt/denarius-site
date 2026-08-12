@@ -50,7 +50,7 @@ export function LandingHeader() {
         </a>
         {/* Pílula: na barra, a altura reduzida pede o raio total. */}
         <WaitlistDialog
-          trigger={<CtaLink size="sm">Entrar na lista</CtaLink>}
+          trigger={<CtaLink size="sm" glare>Entrar na lista</CtaLink>}
         />
         <MobileNav links={NAV_LINKS} />
       </div>

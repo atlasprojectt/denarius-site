@@ -5,6 +5,7 @@ import { m } from "motion/react";
 import type { HTMLMotionProps, Variants } from "motion/react";
 import { ArrowRightIcon } from "lucide-react";
 import { SMALL } from "./motion";
+import "@/components/GlareHover.css";
 
 /**
  * O `rest` é tipado pelas props do `motion`, e não pelas do DOM: as duas
@@ -20,6 +21,8 @@ type CtaLinkProps = {
   size?: "sm" | "lg";
   /** Seta que desloca no hover (UI.md: corpo estável, seta se move). */
   arrow?: boolean;
+  /** Brilho que cruza o botão no hover. */
+  glare?: boolean;
   children: ReactNode;
 } & Omit<
   HTMLMotionProps<"button">,
@@ -83,11 +86,12 @@ export function CtaLink({
   variant = "primary",
   size = "lg",
   arrow = false,
+  glare = false,
   children,
   ...rest
 }: CtaLinkProps) {
   const motionProps = {
-    className: `${BASE} ${SIZES[size]} ${VARIANTS[variant]}`,
+    className: `${BASE} ${SIZES[size]} ${VARIANTS[variant]} ${glare ? "glare-overlay" : ""}`,
     variants: body(variant === "primary"),
     initial: "rest",
     whileHover: "hover",

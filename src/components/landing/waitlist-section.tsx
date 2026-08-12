@@ -34,7 +34,7 @@ export function WaitlistSection() {
             </p>
             <div className="mt-8">
               <WaitlistDialog
-                trigger={<CtaLink arrow>Entrar na lista de acesso</CtaLink>}
+                trigger={<CtaLink arrow glare>Entrar na lista de acesso</CtaLink>}
               />
             </div>
           </div>

@@ -1,0 +1,82 @@
+.glare-hover {
+  width: var(--gh-width);
+  height: var(--gh-height);
+  background: var(--gh-bg);
+  border-radius: var(--gh-br);
+  border: 1px solid var(--gh-border);
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.glare-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--gh-angle),
+    hsla(0, 0%, 0%, 0) 60%,
+    var(--gh-rgba) 70%,
+    hsla(0, 0%, 0%, 0),
+    hsla(0, 0%, 0%, 0) 100%
+  );
+  transition: var(--gh-duration) ease;
+  background-size:
+    var(--gh-size) var(--gh-size),
+    100% 100%;
+  background-repeat: no-repeat;
+  background-position:
+    -100% -100%,
+    0 0;
+}
+
+.glare-hover:hover {
+  cursor: pointer;
+}
+
+.glare-hover:hover::before {
+  background-position:
+    100% 100%,
+    0 0;
+}
+
+.glare-hover--play-once::before {
+  transition: none;
+}
+
+.glare-hover--play-once:hover::before {
+  transition: var(--gh-duration) ease;
+  background-position:
+    100% 100%,
+    0 0;
+}
+
+/* Glare sobreposto a um botão existente (CtaLink): o botão continua sendo o
+   mesmo elemento — o brilho é um overlay que cruza no hover, sem trocar o
+   corpo, a cor ou o raio do CTA. */
+.glare-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.glare-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    -30deg,
+    hsla(0, 0%, 0%, 0) 60%,
+    rgba(255, 255, 255, 0.3) 70%,
+    hsla(0, 0%, 0%, 0) 100%
+  );
+  background-size: 300% 300%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: -100% -100%, 0 0;
+}
+
+.glare-overlay:hover::after {
+  transition: 600ms ease;
+  background-position: 100% 100%, 0 0;
+}
