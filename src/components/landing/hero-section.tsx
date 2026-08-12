@@ -120,6 +120,7 @@ export function HeroSection() {
                   width={3804}
                   height={2028}
                   preload
+                  quality={100}
                   sizes="(min-width: 1640px) 1320px, (min-width: 1024px) calc(100vw - 192px), (min-width: 640px) calc(100vw - 128px), calc(100vw - 80px)"
                   className="h-auto w-full"
                 />

@@ -9,7 +9,7 @@ import { WAITLIST_ENABLED, isValidEmail, submitWaitlist } from "./waitlist";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const FIELD_CLASS =
-  "h-11 w-full min-w-0 rounded-lg border border-input bg-background px-3.5 text-sm text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) placeholder:text-muted-foreground focus-visible:border-brand-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-60 aria-invalid:border-destructive";
+  "h-11 w-full min-w-0 rounded-lg border border-input bg-background px-3.5 text-sm text-foreground transition-colors duration-(--duration-standard) ease-(--ease-out-quart) placeholder:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-60 aria-invalid:border-destructive";
 
 type WaitlistFormProps = {
   /** Ação secundária ao lado do envio — o "Cancelar" quando está num modal. */

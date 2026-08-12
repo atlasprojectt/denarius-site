@@ -1,4 +1,5 @@
 import { CapabilitiesSection } from "@/components/landing/capabilities-section";
+import { ColorBendsBackground } from "@/components/landing/color-bends-background";
 import { FAQSection } from "@/components/landing/faq-section";
 import { HeroSection } from "@/components/landing/hero-section";
 import { LandingFooter } from "@/components/landing/landing-footer";
@@ -20,9 +21,10 @@ import { WaitlistSection } from "@/components/landing/waitlist-section";
 export default function Home() {
   return (
     <MotionProvider>
-      <div id="topo" className="flex flex-1 flex-col font-sans">
+      <ColorBendsBackground />
+      <div id="topo" className="relative flex flex-1 flex-col font-sans">
         <LandingHeader />
-        <main className="flex-1">
+        <main className="relative z-10 flex-1">
           <HeroSection />
           <VerdictSection />
           <CapabilitiesSection />
