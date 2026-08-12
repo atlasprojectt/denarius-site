@@ -47,12 +47,12 @@ export function CapabilityCard({
   return (
     <article
       className={cn(
-        "rounded-3xl border border-border bg-background p-4 sm:p-5 lg:p-6",
+        "rounded-3xl border border-border bg-background p-2.5 sm:p-3 lg:p-4",
         className,
       )}
     >
-      <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-        <div className={cn("max-w-md", mediaFirst && "lg:order-2")}>
+      <div className="grid items-center gap-4 lg:grid-cols-2 lg:gap-6">
+        <div className={cn("max-w-md px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3", mediaFirst && "lg:order-2")}>
           <p className="font-mono text-xs tracking-widest text-brand-accent-light">
             {eyebrow}
           </p>

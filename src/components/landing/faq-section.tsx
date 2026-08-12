@@ -65,6 +65,7 @@ export function FAQSection() {
       emphasis="quiet"
       narrow
       surface="raised"
+      className="text-center"
     >
       <script
         type="application/ld+json"

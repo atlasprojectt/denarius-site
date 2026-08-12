@@ -96,7 +96,7 @@ export function Section({
           spacious ? "py-20 sm:py-28 lg:py-32" : "py-16 sm:py-20 lg:py-24",
         )}
       >
-        <div className={cn("w-full", narrow && "max-w-3xl")}>
+        <div className={cn("w-full", narrow && "mx-auto max-w-3xl")}>
           {hasHeader ? (
             <SectionHeader
               eyebrow={eyebrow}

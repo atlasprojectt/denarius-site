@@ -15,6 +15,7 @@ export function IntegrationsSection() {
       eyebrow="Integrações"
       title="Tudo o que você já paga, em uma conta só."
       intro="Quatro fontes entram, e sai um número por time comparado ao orçamento."
+      emphasis="statement"
     >
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <ul className="grid gap-6 sm:grid-cols-2">

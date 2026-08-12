@@ -21,7 +21,7 @@ export function FaqItem({ question, answer }: { question: string; answer: string
   // O `px-3` acompanha o do gatilho para que pergunta e resposta fiquem na
   // mesma coluna.
   const answerBody = (
-    <p className="max-w-2xl px-3 pb-4 text-sm leading-7 text-muted-foreground">
+    <p className="mx-auto max-w-2xl px-3 pb-4 text-center text-sm leading-7 text-muted-foreground">
       {answer}
     </p>
   );
@@ -36,7 +36,7 @@ export function FaqItem({ question, answer }: { question: string; answer: string
           aria-controls={panelId}
           // Sem margem negativa: com ela o fundo do hover ficava mais largo que
           // as divisórias da lista e a linha aparecia torta.
-          className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-md px-3 py-4 text-left font-medium transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-foreground/[0.03] hover:text-brand-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-md px-3 py-4 text-center font-medium transition-colors duration-(--duration-standard) ease-(--ease-out-quart) hover:bg-foreground/[0.03] hover:text-brand-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           {question}
           <m.span

@@ -76,6 +76,7 @@ export function TrustSection() {
       eyebrow="Confiança"
       title="O que o Denarius vê — e o que ele não vê."
       intro="O produto acessa apenas os dados necessários para organizar custos e acompanhar orçamentos."
+      emphasis="statement"
       rule
     >
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">

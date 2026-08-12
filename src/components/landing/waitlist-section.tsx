@@ -25,7 +25,7 @@ export function WaitlistSection() {
             <p className="font-mono text-xs uppercase tracking-widest text-brand-accent-light">
               Lista de acesso
             </p>
-            <h2 className="mt-4 max-w-3xl text-balance text-3xl font-normal tracking-tight sm:text-4xl">
+            <h2 className="mt-4 max-w-3xl text-balance text-2xl font-normal tracking-tight sm:text-3xl lg:text-4xl">
               Controle o gasto com IA antes da fatura.
             </h2>
             <p className="explainer mt-5 max-w-xl text-foreground/70">

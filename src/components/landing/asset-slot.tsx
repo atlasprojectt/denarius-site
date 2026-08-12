@@ -6,11 +6,11 @@
  * posterior. Nada aqui simula a interface: sem skeleton, sem ícone, sem mockup
  * falso.
  *
- * Em `bare` o espaço fica limpo — nenhum texto visível, só a superfície na
- * proporção certa. É o modo usado dentro dos cards, onde a legenda competiria
- * com a composição. O rótulo acessível e o `data-asset` continuam lá, então
- * nada se perde: a descrição segue no `aria-label` e o `ASSETS.md` continua
- * sendo a referência de tamanho.
+ * Em `bare` o espaço fica limpo — só a superfície na proporção certa com a
+ * proporção e o tamanho anotados no centro. É o modo usado dentro dos cards,
+ * onde a legenda competiria com a composição. O rótulo acessível e o
+ * `data-asset` continuam lá, então nada se perde: a descrição segue no
+ * `aria-label` e o `ASSETS.md` continua sendo a referência de tamanho.
  */
 import { cn } from "@/lib/utils";
 
@@ -46,7 +46,7 @@ export function AssetSlot({
          laranja, então o chamador precisa poder trocar o fundo — e concatenar
          classes cruas não garante qual delas vence. */
       className={cn(
-        "w-full rounded-2xl",
+        "w-full",
         // Tracejado só quando há legenda. No modo limpo o traço contínuo faz o
         // espaço ler como área reservada, e não como caixa de instrução.
         //
@@ -54,13 +54,20 @@ export function AssetSlot({
         // fundo da página: é essa diferença que faz a superfície do card
         // aparecer em volta do recorte e virar borda. Igualados, o espaço
         // sumiria dentro do card.
+        //
+        // O raio acompanha a moldura: externo `rounded-3xl` (1.25rem) menos o
+        // padding do card (0.625/0.75/1rem), com piso de 8px (0.5rem).
         bare
-          ? "border border-(--frame-line) bg-card"
-          : "flex flex-col justify-end gap-2 border border-dashed border-(--frame-line) bg-card/30 p-5",
+          ? "flex flex-col items-center justify-center gap-1 rounded-[0.625rem] sm:rounded-[0.5rem] lg:rounded-[0.5rem] border border-(--frame-line) bg-card"
+          : "rounded-2xl flex flex-col justify-end gap-2 border border-dashed border-(--frame-line) bg-card/30 p-5",
         className,
       )}
     >
-      {bare ? null : (
+      {bare ? (
+        <p aria-hidden="true" className="font-mono text-xs text-muted-foreground">
+          {ratio} · {dimensions}
+        </p>
+      ) : (
         <>
           {/* O texto encolhe no mobile: em coluna estreita o slot fica baixo, e
               a legenda precisa caber dentro da proporção reservada — ela é

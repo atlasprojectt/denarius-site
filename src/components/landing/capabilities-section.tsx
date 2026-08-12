@@ -40,6 +40,7 @@ export function CapabilitiesSection() {
       eyebrow="O que o produto faz"
       title="Do gasto disperso à decisão."
       intro="Veja onde o dinheiro está, como o mês deve fechar e o que precisa de atenção."
+      emphasis="statement"
       surface="raised"
     >
       {/* Três cards horizontais empilhados. Só o lado do visual alterna — a
@@ -130,9 +131,16 @@ export function CapabilitiesSection() {
               key={step.title}
               as="li"
               delay={index * 0.08}
-              className="border-t border-(--frame-line) pt-5"
+              className="pt-5"
             >
-              <p className="font-mono text-xs tracking-widest text-brand-accent-light">
+              <AssetSlot
+                id={`fluxo-${String(index + 1).padStart(2, "0")}`}
+                ratio="3 / 2"
+                brief={`Ilustração do passo ${index + 1}: ${step.title.toLowerCase()}.`}
+                dimensions="1200 × 800 px"
+                bare
+              />
+              <p className="mt-5 font-mono text-xs tracking-widest text-brand-accent-light">
                 {String(index + 1).padStart(2, "0")}
               </p>
               <h4 className="mt-2 text-lg font-normal">{step.title}</h4>

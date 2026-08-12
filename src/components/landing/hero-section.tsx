@@ -105,16 +105,25 @@ export function HeroSection() {
             {...item}
             className="mx-auto -mb-16 w-full max-w-[1480px] px-6 pt-16 sm:-mb-40 sm:px-12 sm:pt-20 lg:-mb-56 lg:px-20"
           >
-            <div className="overflow-hidden rounded-xl border border-foreground/10">
-              <Image
-                src="/hero-dashboard.png"
-                alt="Painel do Denarius: veredito de estouro do time de Engenharia, gasto do mês contra o orçamento com projeção de fechamento, gasto por fonte e a tabela de orçamento dos times."
-                width={1751}
-                height={934}
-                preload
-                sizes="(min-width: 1640px) 1320px, (min-width: 1024px) calc(100vw - 192px), (min-width: 640px) calc(100vw - 128px), calc(100vw - 80px)"
-                className="h-auto w-full"
+            {/* Moldura de vidro: uma div maior atrás do mock, só o traço e a
+                névoa suficiente para separar a captura do card sem roubar a
+                cena. O mock segue tocando a base do card como antes. */}
+            <div className="relative">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-1 rounded-xl border border-foreground/10 bg-foreground/[0.03] backdrop-blur-sm sm:-inset-1.5"
               />
+              <div className="relative overflow-hidden rounded-xl">
+                <Image
+                  src="/hero-mock.png"
+                  alt="Painel do Denarius: veredito de estouro do time de Engenharia, gasto do mês contra o orçamento com projeção de fechamento, gasto por fonte e a tabela de orçamento dos times."
+                  width={3804}
+                  height={2028}
+                  preload
+                  sizes="(min-width: 1640px) 1320px, (min-width: 1024px) calc(100vw - 192px), (min-width: 640px) calc(100vw - 128px), calc(100vw - 80px)"
+                  className="h-auto w-full"
+                />
+              </div>
             </div>
           </m.div>
         </m.div>

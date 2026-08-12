@@ -79,7 +79,7 @@
   --sidebar-primary-foreground: lab(97.7008% 1.53735 5.90649);
   /* O cinza. É o único: todas as superfícies acima do fundo saem daqui, sem
      degraus intermediários. */
-  --sidebar-accent: #080707;
+  --sidebar-accent: #0c0b0b;
 
   --background: var(--sidebar);
   --foreground: var(--sidebar-foreground);
@@ -149,7 +149,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: color-mix(
     in lab,
-    var(--sidebar-foreground) 7%,
+    var(--sidebar-foreground) 11%,
     transparent
   );
   --input: color-mix(
@@ -166,7 +166,7 @@
      conteúdo pode existir, e por isso ela vive no fluxo do documento — é
      borda de container, rolando junto com a página, e não uma camada fixa
      por trás dela. É o que dá corpo à composição em vez de decorá-la. */
-  --frame-line: color-mix(in lab, var(--sidebar-foreground) 5%, transparent);
+  --frame-line: color-mix(in lab, var(--sidebar-foreground) 8%, transparent);
 }
 
 .dark {

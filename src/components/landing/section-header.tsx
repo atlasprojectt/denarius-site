@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
  * hierarquia e fazia a leitura parecer uma pilha de blocos iguais.
  */
 export const EMPHASIS = {
-  statement: "text-3xl sm:text-4xl lg:text-5xl",
-  standard: "text-2xl sm:text-3xl lg:text-4xl",
-  quiet: "text-xl sm:text-2xl",
+  statement: "text-2xl sm:text-3xl lg:text-4xl",
+  standard: "text-xl sm:text-2xl lg:text-3xl",
+  quiet: "text-lg sm:text-xl",
 } as const;
 
 export type Emphasis = keyof typeof EMPHASIS;
