@@ -1,4 +1,5 @@
-<img width="1903" height="1016" alt="image" src="https://github.com/user-attachments/assets/1f267b8b-e726-4143-ae55-b10d9b0edd31" />
+<img width="1896" height="1009" alt="Captura de tela 2026-08-13 174603" src="https://github.com/user-attachments/assets/52d9aa73-84de-486e-a267-e3ae1fc75a72" />
+
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
