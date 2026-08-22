@@ -12,6 +12,7 @@ const COLUMNS = [
     heading: "Produto",
     links: [
       { href: "#produto", label: "Produto" },
+      { href: "#como-funciona", label: "Como funciona" },
       { href: "#confianca", label: "Confiança" },
       { href: "#perguntas-frequentes", label: "Perguntas" },
     ],

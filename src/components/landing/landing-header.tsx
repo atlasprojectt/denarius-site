@@ -7,6 +7,7 @@ import { WaitlistDialog } from "./waitlist-dialog";
 
 const NAV_LINKS = [
   { href: "#produto", label: "Produto" },
+  { href: "#como-funciona", label: "Como funciona" },
   { href: "#confianca", label: "Confiança" },
   { href: "#perguntas-frequentes", label: "Perguntas" },
 ];

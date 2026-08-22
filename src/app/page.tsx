@@ -1,6 +1,8 @@
 import { CapabilitiesSection } from "@/components/landing/capabilities-section";
+import { AlertsSection } from "@/components/landing/alerts-section";
 import { FAQSection } from "@/components/landing/faq-section";
 import { HeroSection } from "@/components/landing/hero-section";
+import { HowItWorksSection } from "@/components/landing/how-it-works-section";
 import { LandingFooter } from "@/components/landing/landing-footer";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { MotionProvider } from "@/components/landing/motion-provider";
@@ -26,6 +28,8 @@ export default function Home() {
           <HeroSection />
           <VerdictSection />
           <CapabilitiesSection />
+          <AlertsSection />
+          <HowItWorksSection />
           <TrustSection />
           <FAQSection />
           <WaitlistSection />

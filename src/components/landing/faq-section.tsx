@@ -5,47 +5,42 @@ import { Section } from "./section";
 const QUESTIONS = [
   {
     q: "Como funciona a lista de acesso?",
-    a: "Você deixa nome e e-mail. Liberamos o acesso por etapas e entramos em contato com as instruções para conectar a conta.",
+    a: "Você deixa nome e e-mail corporativo. Liberamos o acesso por etapas e entramos em contato com as instruções quando uma nova rodada abrir.",
   },
   {
-    q: "O Denarius bloqueia o uso de IA?",
-    a: "Não. O Denarius é somente leitura: mostra riscos e recomenda ações, mas nunca bloqueia ou altera o uso.",
+    q: "O Denarius bloqueia ou limita o uso de IA?",
+    a: "Não. O Denarius é uma camada de leitura e governança: mostra riscos e permite simular ações, mas não bloqueia nem altera o uso.",
   },
   {
     q: "O Denarius armazena prompts ou respostas?",
-    a: "Não. Ele armazena apenas metadados de uso, como tokens, custo, modelo e identificadores.",
+    a: "Não. Ele usa metadados de uso e custo, como valor, modelo, data e identificadores. Prompts, respostas, anexos e conversas não são armazenados.",
   },
   {
-    q: "Como os custos são atribuídos aos times?",
-    a: "Projetos, workspaces, chaves e usuários são ligados aos times pela sua estrutura. Chaves compartilhadas ficam no time responsável.",
+    q: "Quais provedores são suportados?",
+    a: "OpenAI e Anthropic nesta versão. Assinaturas e assentos também entram na composição financeira.",
   },
   {
-    q: "Os orçamentos da empresa e dos times podem ser diferentes?",
-    a: "Sim. Empresa e times têm limites, projeções e alertas independentes.",
+    q: "Com que frequência os dados são sincronizados?",
+    a: "Uma vez por dia, além da primeira sincronização ao conectar o provedor. Cada leitura informa quando os dados foram atualizados.",
   },
   {
-    q: "Com que frequência os dados são atualizados?",
-    a: "Uma vez por dia, além da primeira sincronização ao conectar o provedor. A tela mostra quando os dados foram atualizados.",
+    q: "Quando a projeção começa a aparecer?",
+    a: "A partir do quinto dia do período, quando existe uma base mínima de observação. Até lá, o produto indica que ainda está coletando ritmo.",
   },
   {
     q: "O que acontece com gastos não atribuídos?",
-    a: "O valor aparece como “Não atribuído” e continua no total da empresa até você mapear a origem.",
+    a: "Eles aparecem como “Não atribuído” e continuam no total da empresa até que a origem seja mapeada. Nenhum custo desaparece da leitura.",
   },
   {
-    q: "É possível ocultar nomes individuais?",
-    a: "Sim. Nomes ficam restritos a administradores e o dado individual pode ser desativado.",
+    q: "Os alertas se repetem todos os dias?",
+    a: "Não. Há um aviso por combinação de time, faixa e período. Um novo alerta só é enviado quando existe uma escalada real.",
   },
   {
-    q: "Quais provedores são compatíveis?",
-    a: "OpenAI e Anthropic nesta versão. Outras assinaturas podem ser cadastradas manualmente.",
-  },
-  {
-    q: "Como funciona a cobrança?",
-    a: "Mensalidade fixa por faixa de tamanho da empresa. A contratação é feita diretamente com nossa equipe.",
+    q: "O Denarius substitui a fatura oficial?",
+    a: "Não. O Denarius antecipa e organiza a leitura para decisão; a fatura emitida pelo provedor continua sendo o documento oficial de cobrança.",
   },
 ];
 
-/** Dados estruturados para que as respostas apareçam na busca. */
 const FAQ_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -61,18 +56,16 @@ export function FAQSection() {
     <Section
       id="perguntas-frequentes"
       eyebrow="Perguntas frequentes"
-      title="O que perguntam antes de conectar."
-      emphasis="quiet"
+      title="Antes de conectar."
+      intro="As respostas essenciais sobre acesso, dados, sincronização e limites do produto."
+      emphasis="standard"
       narrow
       surface="raised"
-      className="text-center"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
       />
-      {/* O atraso tem teto em quatro posições: são dez perguntas, e escalonar
-          todas deixaria a última esperando quase meio segundo para aparecer. */}
       <div className="divide-y divide-border border-t border-border">
         {QUESTIONS.map((item, index) => (
           <Reveal key={item.q} delay={Math.min(index, 4) * 0.04}>

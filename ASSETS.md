@@ -1,72 +1,25 @@
-# Assets do site — o que criar
+# Assets da landing Denarius
 
-Os espaços abaixo ficam vazios até existirem recortes reais do produto. Cada
-placeholder no site informa o conteúdo esperado e o tamanho de exportação.
+Os slots abaixo reservam a proporção final e devem ser substituídos sem alterar
+o layout. Até a entrega dos arquivos, a área interna permanece vazia: sem
+skeleton, gráfico falso ou interface inventada.
 
-**Formato geral:** WebP ou PNG, fundo escuro combinando com `#050404` e texto
-legível quando a imagem encolher para aproximadamente 350 px de largura.
+| Identificador | Arquivo sugerido | Exportação | Proporção | Brief obrigatório |
+| --- | --- | ---: | ---: | --- |
+| `hero-mock` | `public/hero-mock.png` | Existente (3804 × 2028 px) | Existente | Painel completo atual. Preservar arquivo, posição e uso exclusivo no hero. |
+| `veredito-executivo` | `public/veredito-executivo.png` | 1600 × 600 px | 8:3 | Somente veredito, frase executiva e última sincronização. Sem dashboard completo ou cards auxiliares. |
+| `composicao-fontes` | `public/composicao-fontes.png` | 1440 × 960 px | 3:2 | Provedor, assinatura, assento e item não atribuído. Foco exclusivo em origem e atribuição. |
+| `ritmo-projecao` | `public/ritmo-projecao.png` | 1440 × 960 px | 3:2 | Orçamento, gasto atual, tempo decorrido e projeção. Um período e uma leitura principal. |
+| `simulacao-cenario` | `public/simulacao-cenario.png` | 1440 × 960 px | 3:2 | Alteração de ritmo de um time e resultado antes/depois. Mostrar somente um cenário. |
+| `relatorio-resumo` | `public/relatorio-resumo.png` | 1440 × 960 px | 3:2 | Cabeçalho e resumo executivo de um relatório. Não mostrar o relatório inteiro. |
+| `alerta-escalada` | `public/alerta-escalada.png` | 1280 × 960 px | 4:3 | Um alerta com time, faixa, período e contexto. Uma notificação, sem central completa. |
+| `conexao-somente-leitura` | `public/conexao-somente-leitura.png` | 1440 × 900 px | 8:5 | Conexão administrativa e permissão de leitura. Foco em segurança da conexão. |
 
----
+## Regras de substituição
 
-## Já existe ✅
-
-| Onde | Arquivo | Situação |
-|---|---|---|
-| Hero | `public/hero-dashboard.png` | Captura real do painel |
-| Hero e CTA | `public/hero-backdrop.jpg` | Fundo da marca |
-
----
-
-## Faltam — 4 recortes do produto
-
-Os identificadores são os mesmos do atributo `data-asset` no HTML, então dá
-para achar cada espaço inspecionando a página.
-
-### 1. `veredito-barra`
-
-**Seção:** “O seu gasto com IA está sob controle?”  
-**Proporção:** 16:3 · **Exportar:** 1600 × 300 px
-
-Barra do veredito com status, frase, ação recomendada e data da última
-sincronização.
-
-### 2. `orcamento-mes`
-
-**Seção:** “Orçamento no ritmo do mês.” (card 01, tom `ember`)  
-**Proporção:** 3:2 · **Exportar:** 1600 × 1067 px
-
-Gasto do mês, orçamento, marcador do dia e projeção de fechamento.
-
-### 3. `composicao-fonte`
-
-**Seção:** “Cada custo com seu responsável.” (card 02, tom `slate`)  
-**Proporção:** 3:2 · **Exportar:** 1600 × 1067 px
-
-Provedores, assinaturas, valores e a linha de gasto não atribuído.
-
-### 4. `orcamento-times`
-
-**Seção:** “Riscos priorizados para agir.” (card 03)  
-**Proporção:** 3:2 · **Exportar:** 1600 × 1067 px
-
-Times com status, gasto, orçamento e projeção de fechamento.
-
-> **Os três recortes dos cards usam a mesma proporção (3:2), de propósito.** O
-> `orcamento-times` era 16:7 e destoava da pilha. Manter a proporção igual nos
-> três é o que mantém os cards no prumo.
->
-> Dentro dos cards o espaço fica **limpo**: sem legenda visível e sem fundo
-> decorativo (`bare` no `AssetSlot`). A descrição continua no `aria-label` e o
-> tamanho, aqui. Fora deles — o `veredito-barra` — a legenda permanece à vista.
->
-> O recorte é **um pouco menor que o card**, e o que aparece em volta dele é a
-> superfície do card fazendo as vezes de borda. Não há sobreposição nem
-> transbordo: nada do recorte é cortado, e nada dele avança para fora do card.
-
----
-
-## Como enviar
-
-Os arquivos podem chegar com qualquer nome. Para facilitar, use os
-identificadores acima. Depois eles serão colocados em `public/` e substituirão
-os placeholders sem alterar a proporção ou o layout responsivo.
+- A legenda com brief e tamanho permanece visível enquanto o asset não existe.
+- A proporção deve ser mantida para evitar mudança de layout.
+- Nenhum visual, além do mock existente no hero, deve dominar uma dobra inteira.
+- O `hero-mock` é a única visão ampla do painel completo.
+- Ao inserir um arquivo final, preserve o `data-asset` no contêiner ou na imagem
+  para manter a rastreabilidade.

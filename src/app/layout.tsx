@@ -23,9 +23,9 @@ const dmMono = DM_Mono({
   display: "swap",
 });
 
-const TITLE = "Denarius — Governança de gastos com IA";
+const TITLE = "Denarius — Gasto com IA sob controle";
 const DESCRIPTION =
-  "O Denarius reúne o gasto com IA da empresa, compara com o orçamento todos os dias e avisa antes da fatura. Somente leitura, sem acesso a prompts ou respostas.";
+  "Transforme o uso de OpenAI e Anthropic em dinheiro, compare com os orçamentos e antecipe decisões antes da fatura. Somente leitura, sem prompts ou respostas.";
 
 export const metadata: Metadata = {
   // TODO: trocar pelo domínio real quando ele existir.
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
         url: "/hero-dashboard.png",
         width: 1751,
         height: 934,
-        alt: "Painel do Denarius mostrando o gasto do mês contra o orçamento, a projeção de fechamento e o orçamento dos times.",
+        alt: "Painel do Denarius com conclusão executiva, orçamento, gasto e projeção do período.",
       },
     ],
   },

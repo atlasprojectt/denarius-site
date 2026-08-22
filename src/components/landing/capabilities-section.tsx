@@ -1,155 +1,99 @@
+import {
+  ChartNoAxesCombinedIcon,
+  FileTextIcon,
+  Layers3Icon,
+  SlidersHorizontalIcon,
+} from "lucide-react";
 import { AssetSlot } from "./asset-slot";
 import { CapabilityCard } from "./capability-card";
-import { CtaLink } from "./cta-link";
 import { Reveal } from "./reveal";
 import { Section } from "./section";
-import { WAITLIST_ANCHOR } from "./links";
 
-/**
- * O fluxo de adoção, que antes ocupava uma seção inteira. Como argumento ele
- * cabe em três linhas: o que você conecta, o que você define e o que acontece
- * todo dia. Em seção própria, ele repetia o produto em outra ordem.
- */
-const STEPS = [
+const CAPABILITIES = [
   {
-    title: "Conecte",
-    text: "OpenAI, Anthropic, assinaturas e times.",
+    eyebrow: "Composição",
+    title: "Cada custo com sua origem.",
+    description:
+      "Reúna APIs, assinaturas e assentos por provedor e centro de custo. O que ainda não foi mapeado continua visível como “Não atribuído”.",
+    id: "composicao-fontes",
+    brief:
+      "Provedor, assinatura, assento e item não atribuído, com foco exclusivo em origem e atribuição.",
+    dimensions: "1440 × 960 px",
+    icon: Layers3Icon,
+    mediaSide: "bottom" as const,
   },
   {
-    title: "Defina",
-    text: "Crie limites para a empresa e para cada time.",
+    eyebrow: "Ritmo",
+    title: "O fechamento antes da fatura.",
+    description:
+      "Compare o percentual do orçamento com o tempo decorrido. Quando há base suficiente, veja a projeção do período.",
+    id: "ritmo-projecao",
+    brief:
+      "Um período com orçamento, gasto atual, tempo decorrido e uma leitura principal de projeção.",
+    dimensions: "1440 × 960 px",
+    icon: ChartNoAxesCombinedIcon,
+    mediaSide: "top" as const,
   },
   {
-    title: "Acompanhe",
-    text: "Receba o veredito e os alertas diariamente.",
+    eyebrow: "Cenários",
+    title: "Veja o efeito antes de decidir.",
+    description:
+      "Altere o ritmo de um time e compare o resultado antes e depois. O Denarius mostra o impacto; a decisão permanece com a empresa.",
+    id: "simulacao-cenario",
+    brief:
+      "Alteração do ritmo de um único time e o resultado antes/depois em um cenário.",
+    dimensions: "1440 × 960 px",
+    icon: SlidersHorizontalIcon,
+    mediaSide: "top" as const,
+  },
+  {
+    eyebrow: "Relatórios",
+    title: "Uma leitura pronta para compartilhar.",
+    description:
+      "Gere resumos do mês corrente ou de períodos fechados com veredito, valores e notas metodológicas.",
+    id: "relatorio-resumo",
+    brief:
+      "Cabeçalho e resumo executivo de um relatório, sem exibir o documento inteiro.",
+    dimensions: "1440 × 960 px",
+    icon: FileTextIcon,
+    mediaSide: "bottom" as const,
   },
 ];
 
-/**
- * As três capacidades, cada uma num card com o recorte do produto ao lado da
- * afirmação que ele sustenta.
- *
- * Os cards são idênticos em superfície, medida, proporção e espaçamento. O
- * ritmo vem só da alternância do lado do visual — variar também cor e formato
- * fazia a pilha ler como três componentes sem parentesco.
- */
 export function CapabilitiesSection() {
   return (
     <Section
       id="produto"
-      eyebrow="O que o produto faz"
-      title="Do gasto disperso à decisão."
-      intro="Veja onde o dinheiro está, como o mês deve fechar e o que precisa de atenção."
+      eyebrow="Produto"
+      title="Uma visão para decidir."
+      intro="Da composição do gasto à projeção do período, cada leitura existe para responder uma pergunta financeira concreta."
       emphasis="statement"
       surface="raised"
     >
-      {/* Três cards horizontais empilhados. Só o lado do visual alterna — a
-          proporção do recorte é a mesma nos três, senão a pilha perde o prumo.
-          O `16 / 7` que o terceiro usava era o que mais destoava. */}
-      <div className="grid gap-8">
-        <Reveal>
-          <CapabilityCard
-            mediaSide="right"
-            eyebrow="01 · Governar"
-            title="Orçamento no ritmo do mês."
-            description="Compare gasto, limite e dias decorridos. Veja a projeção antes da fatura."
-            media={
-              <AssetSlot
-                id="orcamento-mes"
-                ratio="3 / 2"
-                brief="Gasto do mês, orçamento, marcador do dia e projeção de fechamento."
-                dimensions="1600 × 1067 px"
-                bare
+      <div className="grid gap-6 lg:grid-cols-2">
+        {CAPABILITIES.map((capability, index) => {
+          const Icon = capability.icon;
+          return (
+            <Reveal key={capability.id} delay={(index % 2) * 0.06}>
+              <CapabilityCard
+                mediaSide={capability.mediaSide}
+                eyebrow={capability.eyebrow}
+                title={capability.title}
+                description={capability.description}
+                icon={<Icon aria-hidden="true" className="size-[18px]" />}
+                media={
+                  <AssetSlot
+                    id={capability.id}
+                    ratio="3 / 2"
+                    brief={capability.brief}
+                    dimensions={capability.dimensions}
+                    bare
+                  />
+                }
               />
-            }
-          />
-        </Reveal>
-
-        <Reveal>
-          <CapabilityCard
-            mediaSide="left"
-            eyebrow="02 · Entender"
-            title="Cada custo com seu responsável."
-            description="Distribua APIs e assinaturas por time, provedor e modelo. Valores sem origem continuam visíveis."
-            media={
-              <AssetSlot
-                id="composicao-fonte"
-                ratio="3 / 2"
-                brief="Provedores, assinaturas, valores e a linha de gasto não atribuído."
-                dimensions="1600 × 1067 px"
-                bare
-              />
-            }
-          />
-        </Reveal>
-
-        {/* O terceiro fecha a seção, então é o que carrega a chamada. */}
-        <Reveal>
-          <CapabilityCard
-            mediaSide="right"
-            eyebrow="03 · Agir"
-            title="Riscos priorizados para agir."
-            description="Identifique times fora do ritmo, os maiores custos e o efeito de possíveis ajustes."
-            action={
-              <CtaLink
-                href={WAITLIST_ANCHOR}
-                variant="secondary"
-                size="sm"
-                arrow
-              >
-                Entrar na lista de acesso
-              </CtaLink>
-            }
-            media={
-              <AssetSlot
-                id="orcamento-times"
-                ratio="3 / 2"
-                brief="Times com status, gasto, orçamento e projeção de fechamento."
-                dimensions="1600 × 1067 px"
-                bare
-              />
-            }
-          />
-        </Reveal>
-      </div>
-
-      {/* O fluxo fecha a seção: depois de ver o que o produto faz, a pergunta
-          seguinte é o que custa adotá-lo. */}
-      <div className="mt-20 border-t border-border pt-12 sm:mt-24">
-        <Reveal>
-          <h3 className="text-xl font-normal tracking-tight sm:text-2xl">
-            E você não muda nada do que já está funcionando.
-          </h3>
-          <p className="explainer mt-4 max-w-2xl text-muted-foreground">
-            O Denarius lê metadados e não fica no caminho das suas requisições.
-          </p>
-        </Reveal>
-
-        <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-10">
-          {STEPS.map((step, index) => (
-            <Reveal
-              key={step.title}
-              as="li"
-              delay={index * 0.08}
-              className="pt-5"
-            >
-              <AssetSlot
-                id={`fluxo-${String(index + 1).padStart(2, "0")}`}
-                ratio="3 / 2"
-                brief={`Ilustração do passo ${index + 1}: ${step.title.toLowerCase()}.`}
-                dimensions="1200 × 800 px"
-                bare
-              />
-              <p className="mt-5 font-mono text-xs tracking-widest text-brand-accent-light">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h4 className="mt-2 text-lg font-normal">{step.title}</h4>
-              <p className="explainer mt-2 text-sm text-muted-foreground">
-                {step.text}
-              </p>
             </Reveal>
-          ))}
-        </ol>
+          );
+        })}
       </div>
     </Section>
   );

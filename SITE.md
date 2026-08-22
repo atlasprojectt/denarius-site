@@ -19,7 +19,7 @@ A navegação conduz para as partes principais da página:
 - Confiança
 - Perguntas frequentes
 
-Há chamadas para solicitar acesso à plataforma. A solicitação pede nome e e-mail corporativo. No estado documentado, o formulário está preparado para captar interesse, mas ainda não possui integração de persistência ou envio ativo.
+Há chamadas para solicitar acesso à plataforma. A solicitação pede nome e e-mail corporativo e notifica por e-mail o responsável pela liberação manual. O envio só confirma sucesso após uma resposta positiva do provedor.
 
 ## Seções do site
 

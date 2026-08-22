@@ -68,16 +68,16 @@ export function HeroSection() {
             <div className="max-w-3xl">
               <m.h1
                 {...item}
-                className="text-balance text-4xl font-normal tracking-tight text-foreground sm:text-5xl"
+                className="max-w-4xl text-balance text-5xl font-normal tracking-[-0.035em] text-foreground sm:text-6xl"
               >
-                Saiba como o mês vai fechar antes da fatura chegar.
+                Saiba se o gasto com IA está sob controle.
               </m.h1>
               <m.p
                 {...item}
                 className="mt-5 max-w-xl text-lg leading-8 text-foreground/85"
               >
-                Reúna custos de OpenAI, Anthropic e assinaturas, compare com o
-                orçamento e receba alertas antes do fechamento.
+                Transforme o uso de OpenAI e Anthropic em dinheiro, compare com
+                os orçamentos e veja o que exige atenção antes da fatura.
               </m.p>
 
               <m.div {...item} className="mt-8 flex flex-wrap items-center gap-4">
@@ -87,7 +87,7 @@ export function HeroSection() {
                   trigger={<CtaLink arrow glare>Entrar na lista de acesso</CtaLink>}
                 />
                 <CtaLink href="#produto" variant="secondary">
-                  Ver como funciona
+                  Ver recursos
                 </CtaLink>
               </m.div>
             </div>
