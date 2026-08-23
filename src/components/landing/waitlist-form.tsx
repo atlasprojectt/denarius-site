@@ -3,6 +3,7 @@
 import { useId, useState, type ReactNode } from "react";
 import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { ArrowRightIcon, CircleCheckIcon, LoaderCircleIcon } from "lucide-react";
+import "@/components/GlareHover.css";
 import { EASE_OUT_QUART, DURATION, SMALL } from "./motion";
 import { isValidEmail, isValidName, submitWaitlist } from "./waitlist";
 
@@ -147,7 +148,7 @@ export function WaitlistForm({ secondaryAction }: { secondaryAction?: ReactNode 
           whileFocus={submitting ? undefined : "hover"}
           whileTap="tap"
           transition={SMALL}
-          className="group inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-70"
+          className="glare-overlay group inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-70"
         >
           {submitting ? "Enviando…" : "Entrar na lista"}
           {submitting ? (

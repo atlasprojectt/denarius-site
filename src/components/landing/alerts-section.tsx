@@ -1,4 +1,5 @@
-import { BellRingIcon, CheckIcon } from "lucide-react";
+import { CircleCheckIcon } from "@/components/ui/circle-check";
+import { AlertTriangleIcon } from "@/components/ui/alert-triangle";
 import { AssetSlot } from "./asset-slot";
 import { Reveal } from "./reveal";
 import { Section } from "./section";
@@ -21,15 +22,23 @@ export function AlertsSection() {
     >
       <div className="grid items-center gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
         <Reveal>
-          <div className="lg:ml-4">
+          <div className="lg:ml-8">
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-brand-accent-light">
-              <BellRingIcon aria-hidden="true" className="size-[18px]" />
+              <AlertTriangleIcon
+                aria-hidden="true"
+                className="inline-flex"
+                size={18}
+              />
               Uma escalada, um alerta
             </div>
-            <ul className="mt-6 divide-y divide-border border-y border-border">
+            <ul className="mt-6 space-y-2">
               {POINTS.map((point) => (
                 <li key={point} className="flex gap-3 py-4 text-sm leading-7 text-foreground/85">
-                  <CheckIcon aria-hidden="true" className="mt-1.5 size-4 shrink-0 text-status-green" />
+                  <CircleCheckIcon
+                    aria-hidden="true"
+                    className="mt-1.5 inline-flex shrink-0 text-status-green"
+                    size={16}
+                  />
                   <span>{point}</span>
                 </li>
               ))}

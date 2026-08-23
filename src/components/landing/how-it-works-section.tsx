@@ -28,7 +28,7 @@ export function HowItWorksSection() {
       surface="raised"
     >
       <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        <ol>
+        <ol className="lg:ml-8">
           {STEPS.map((step, index) => (
             <Reveal key={step.title} as="li" delay={index * 0.07} className="grid grid-cols-[2.5rem_1fr] gap-4 py-6">
               <span className="font-mono text-xs text-brand-accent-light">

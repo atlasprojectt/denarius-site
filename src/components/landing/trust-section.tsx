@@ -1,6 +1,12 @@
-import { EyeOffIcon, GaugeIcon, LockKeyholeIcon, ScaleIcon } from "lucide-react";
+"use client";
+
+import { CircleCheckIcon } from "@/components/ui/circle-check";
+import { EyeOffIcon } from "@/components/ui/eye-off";
+import { GaugeIcon } from "@/components/ui/gauge";
+import { LockKeyholeIcon } from "@/components/ui/lock-keyhole";
 import { Reveal } from "./reveal";
 import { Section } from "./section";
+import { TrustCard } from "./trust-card";
 
 const PRINCIPLES = [
   {
@@ -21,7 +27,7 @@ const PRINCIPLES = [
   {
     title: "Números honestos",
     text: "Lacunas, atrasos, reconciliação e câmbio aparecem com contexto — nunca disfarçados como custo zero.",
-    icon: ScaleIcon,
+    icon: CircleCheckIcon,
   },
 ];
 
@@ -49,14 +55,18 @@ export function TrustSection() {
             {PRINCIPLES.map((principle) => {
               const Icon = principle.icon;
               return (
-                <article
+                <TrustCard
                   key={principle.title}
-                  className="rounded-xl border border-border bg-background p-5 sm:p-6"
-                >
-                  <Icon aria-hidden="true" className="size-5 text-brand-accent-light" />
-                  <h3 className="mt-5 text-xl tracking-tight">{principle.title}</h3>
-                  <p className="explainer mt-3 text-sm text-muted-foreground">{principle.text}</p>
-                </article>
+                  icon={
+                    <Icon
+                      aria-hidden="true"
+                      className="inline-flex text-brand-accent-light"
+                      size={20}
+                    />
+                  }
+                  text={principle.text}
+                  title={principle.title}
+                />
               );
             })}
           </div>

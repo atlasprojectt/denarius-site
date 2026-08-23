@@ -1,9 +1,9 @@
-import {
-  ChartNoAxesCombinedIcon,
-  FileTextIcon,
-  Layers3Icon,
-  SlidersHorizontalIcon,
-} from "lucide-react";
+"use client";
+
+import { ChartLineIcon } from "@/components/ui/chart-line";
+import { FileTextIcon } from "@/components/ui/file-text";
+import { LayersIcon } from "@/components/ui/layers";
+import { SlidersHorizontalIcon } from "@/components/ui/sliders-horizontal";
 import { AssetSlot } from "./asset-slot";
 import { CapabilityCard } from "./capability-card";
 import { Reveal } from "./reveal";
@@ -19,7 +19,7 @@ const CAPABILITIES = [
     brief:
       "Provedor, assinatura, assento e item não atribuído, com foco exclusivo em origem e atribuição.",
     dimensions: "1440 × 960 px",
-    icon: Layers3Icon,
+    icon: LayersIcon,
     mediaSide: "bottom" as const,
   },
   {
@@ -31,7 +31,7 @@ const CAPABILITIES = [
     brief:
       "Um período com orçamento, gasto atual, tempo decorrido e uma leitura principal de projeção.",
     dimensions: "1440 × 960 px",
-    icon: ChartNoAxesCombinedIcon,
+    icon: ChartLineIcon,
     mediaSide: "top" as const,
   },
   {
@@ -80,7 +80,13 @@ export function CapabilitiesSection() {
                 eyebrow={capability.eyebrow}
                 title={capability.title}
                 description={capability.description}
-                icon={<Icon aria-hidden="true" className="size-[18px]" />}
+                icon={
+                  <Icon
+                    aria-hidden="true"
+                    className="inline-flex"
+                    size={18}
+                  />
+                }
                 media={
                   <AssetSlot
                     id={capability.id}
