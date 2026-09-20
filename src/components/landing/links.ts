@@ -12,8 +12,8 @@ export const SIGN_IN_URL = "#";
 /** TODO: trocar por uma rota de contato real ou mailto. */
 export const CONTACT_URL = "#";
 
-/** TODO: trocar pela página real de privacidade. */
-export const PRIVACY_URL = "#";
+/** Página real de privacidade no app. */
+export const PRIVACY_URL = "https://app.usedenarius.pro/privacidade";
 
-/** TODO: trocar pela página real de termos. */
-export const TERMS_URL = "#";
+/** Página real de termos no app. */
+export const TERMS_URL = "https://app.usedenarius.pro/termos";

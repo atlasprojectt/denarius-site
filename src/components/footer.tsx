@@ -69,7 +69,7 @@ export function StickyFooter() {
                     <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
                       {group.links.map((link) => (
                         <li key={link.title}>
-                          <a className="rounded-sm transition-colors duration-(--duration-standard) hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" href={link.href}>
+                          <a className="rounded-sm transition-colors duration-(--duration-standard) hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" href={link.href} {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                             {link.title}
                           </a>
                         </li>
