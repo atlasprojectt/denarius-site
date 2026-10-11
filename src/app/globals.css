@@ -1,0 +1,427 @@
+@import "tailwindcss";
+
+/*
+ * Tokens de docs/nova-landing/DESIGN.md ("The Quiet Ledger").
+ * Cada token traz o valor claro e o escuro em light-dark(); o tema segue o
+ * sistema e o seletor do footer fixa data-theme="light" | "dark" no <html>.
+ * Valores marcados "extensão" não estão no DESIGN.md e foram derivados das
+ * regras dele para a landing.
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Escada de tintas: primary, secondary, subtle, faint */
+  --ink: light-dark(oklch(0.18 0 0), oklch(0.97 0 0));
+  --graphite: light-dark(oklch(0.4 0 0), oklch(0.8 0 0));
+  --ash: light-dark(oklch(0.528 0 0), oklch(0.62 0 0));
+  --ash-rail: light-dark(oklch(0.505 0 0), oklch(0.62 0 0));
+  --mist: light-dark(oklch(0.63 0 0), oklch(0.52 0 0));
+
+  /* Superfícies, empilhadas por tom */
+  --surface-rail: light-dark(oklch(0.93 0 0), oklch(0.11 0 0));
+  --surface-canvas: light-dark(oklch(0.955 0 0), oklch(0.145 0 0));
+  --surface-card: light-dark(oklch(0.97 0 0), oklch(0.19 0 0));
+  --surface-control: light-dark(oklch(0.91 0 0), oklch(0.12 0 0));
+  --surface-elevated: light-dark(oklch(1 0 0), oklch(0.23 0 0));
+  --surface-hover: light-dark(oklch(0.945 0 0), oklch(0.21 0 0));
+  --hairline: light-dark(oklch(0.9 0 0), oklch(1 0 0 / 7%));
+  /* Escuro: extensão, para o foco manter 3:1 sobre o canvas. */
+  --focus-ring: light-dark(oklch(0.55 0 0), oklch(0.7 0 0));
+
+  /* Ação primária: tinta, nunca laranja */
+  --action: light-dark(oklch(0.2 0 0), oklch(0.94 0 0));
+  --action-hover: light-dark(oklch(0.3 0 0), oklch(0.86 0 0));
+  --on-action: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));
+
+  /* Marca e estado ligado */
+  --coin-orange: #ff6524;
+  --signal-orange: #c7480d;
+
+  /* Semáforo: só status de orçamento */
+  --green-base: #22c55e;
+  --amber-base: #f59e0b;
+  --red-base: #e5303c;
+  --status-green: light-dark(
+    var(--green-base),
+    color-mix(in srgb, var(--green-base), white 10%)
+  );
+  --status-amber: light-dark(
+    var(--amber-base),
+    color-mix(in srgb, var(--amber-base), white 10%)
+  );
+  --status-red: light-dark(
+    var(--red-base),
+    color-mix(in srgb, var(--red-base), white 10%)
+  );
+  --status-green-fg: light-dark(
+    color-mix(in srgb, var(--green-base), black 45%),
+    var(--status-green)
+  );
+  --status-amber-fg: light-dark(
+    color-mix(in srgb, var(--amber-base), black 45%),
+    var(--status-amber)
+  );
+  --status-red-fg: light-dark(
+    color-mix(in srgb, var(--red-base), black 20%),
+    color-mix(in srgb, var(--red-base), white 30%)
+  );
+  --status-green-soft: color-mix(in oklab, var(--status-green) 12%, transparent);
+  --status-amber-soft: color-mix(in oklab, var(--status-amber) 12%, transparent);
+  --status-red-soft: color-mix(in oklab, var(--status-red) 12%, transparent);
+  /* Escuro: extensão, o neutro segue a tinta secundária. */
+  --badge-neutral: light-dark(oklch(0.43 0 0), oklch(0.8 0 0));
+  --badge-neutral-soft: color-mix(in oklab, var(--badge-neutral) 12%, transparent);
+
+  /* Domínio do gasto: laranja do ritmo */
+  --pace-orange: light-dark(#f67a12, color-mix(in srgb, #f67a12, white 10%));
+  --pace-spent: var(--pace-orange);
+  --pace-projected: light-dark(
+    color-mix(in srgb, #f67a12, white 60%),
+    color-mix(in srgb, color-mix(in srgb, #f67a12, white 10%), black 60%)
+  );
+  /* Escuro: extensão, um cinza quieto sobre o card escuro. */
+  --pace-budget: light-dark(oklch(0.88 0 0), oklch(0.32 0 0));
+
+  /* Domínio da simulação: violeta, do mais caro (1) ao mais barato (4) */
+  --sim-violet: #7357ff;
+  --sim-1: light-dark(
+    color-mix(in srgb, var(--sim-violet), black 30%),
+    color-mix(in srgb, var(--sim-violet), white 10%)
+  );
+  --sim-2: light-dark(
+    var(--sim-violet),
+    color-mix(in srgb, color-mix(in srgb, var(--sim-violet), white 10%), black 28%)
+  );
+  --sim-3: light-dark(
+    color-mix(in srgb, var(--sim-violet), white 45%),
+    color-mix(in srgb, color-mix(in srgb, var(--sim-violet), white 10%), black 48%)
+  );
+  --sim-4: light-dark(
+    color-mix(in srgb, var(--sim-violet), white 72%),
+    color-mix(in srgb, color-mix(in srgb, var(--sim-violet), white 10%), black 64%)
+  );
+  /* Extensão: o DESIGN.md nomeia --sim-ink sem valor; este segura AA nos dois temas. */
+  --sim-ink: light-dark(
+    color-mix(in srgb, var(--sim-violet), black 30%),
+    color-mix(in srgb, var(--sim-violet), white 35%)
+  );
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Faixa no tom do rail: a tinta sutil troca para o degrau que passa 4.5:1 ali. */
+.band-rail {
+  background-color: var(--surface-rail);
+  --ash: var(--ash-rail);
+}
+
+@theme {
+  --color-*: initial;
+  --color-white: #fff;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-ash: var(--ash);
+  --color-mist: var(--mist);
+
+  --color-rail: var(--surface-rail);
+  --color-canvas: var(--surface-canvas);
+  --color-card: var(--surface-card);
+  --color-control: var(--surface-control);
+  --color-elevated: var(--surface-elevated);
+  --color-hover: var(--surface-hover);
+  --color-hairline: var(--hairline);
+  --color-focus: var(--focus-ring);
+
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-on-action: var(--on-action);
+
+  --color-coin: var(--coin-orange);
+  --color-signal: var(--signal-orange);
+
+  --color-green-fg: var(--status-green-fg);
+  --color-green-soft: var(--status-green-soft);
+  --color-amber-fg: var(--status-amber-fg);
+  --color-amber-soft: var(--status-amber-soft);
+  --color-red-fg: var(--status-red-fg);
+  --color-red-soft: var(--status-red-soft);
+  --color-neutral-fg: var(--badge-neutral);
+  --color-neutral-soft: var(--badge-neutral-soft);
+
+  --color-pace-spent: var(--pace-spent);
+  --color-pace-projected: var(--pace-projected);
+  --color-pace-budget: var(--pace-budget);
+
+  --color-sim-1: var(--sim-1);
+  --color-sim-2: var(--sim-2);
+  --color-sim-3: var(--sim-3);
+  --color-sim-4: var(--sim-4);
+  --color-sim-ink: var(--sim-ink);
+
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    background-color: var(--surface-canvas);
+    color: var(--ink);
+    scrollbar-color: color-mix(in oklab, var(--ink) 22%, transparent) transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--ink) 16%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  a {
+    text-underline-offset: 4px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+}
+
+/*
+ * Estilos de texto do DESIGN.md. Cada um é uma combinação fixa de tamanho,
+ * entrelinha, peso e tracking; a tinta vem à parte.
+ * Os três "display-*" são extensão da landing: acima de 44px, sempre peso 300.
+ */
+@utility type-display-hero {
+  font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.75rem);
+  line-height: 1.02;
+  font-weight: 300;
+  letter-spacing: -0.035em;
+}
+
+@utility type-display-section {
+  font-size: clamp(2.25rem, 1.75rem + 1.6vw, 3.25rem);
+  line-height: 1.08;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+@utility type-display-stat {
+  font-size: clamp(2.75rem, 2.1rem + 1.9vw, 3.75rem);
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility type-display-money {
+  font-size: 2.25rem;
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+
+  @media (width >= 48rem) {
+    font-size: 2.75rem;
+  }
+}
+
+@utility type-headline {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility type-title-lg {
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility type-narrative {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+@utility type-metric {
+  font-size: 1.125rem;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility type-title {
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+@utility type-lead {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@utility type-body {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+@utility type-body-strong {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+@utility type-ui {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+@utility type-ui-strong {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+@utility type-caption {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@utility type-caption-strong {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+@utility type-label-caps {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@utility type-badge {
+  font-size: 0.6875rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Links de texto. Receita do DESIGN.md: sublinhado de tinta a 30%, a 4px do
+ * texto. No hover e no foco do teclado o sublinhado fica laranja, a exceção
+ * que o app já abre para os links do resumo executivo, estendida a todos os
+ * links do site (decisão do fundador, 11/10/2026). Só o traço muda de cor;
+ * o texto continua na tinta.
+ */
+@utility link-underline {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklab, var(--ink) 30%, transparent);
+  text-underline-offset: 4px;
+  transition-property: color, text-decoration-color;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-standard);
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: var(--coin-orange);
+  }
+}
+
+/* O mesmo traço laranja para links que só sublinham no hover (o rodapé). */
+@utility link-hover-underline {
+  text-underline-offset: 4px;
+  text-decoration-color: var(--coin-orange);
+  transition-property: color;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-standard);
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-line: underline;
+  }
+}
+
+/* Skeleton: mesma geometria do que representa, com pulso. */
+@layer components {
+  .sk {
+    display: block;
+    border-radius: var(--radius-sm);
+    background-color: color-mix(in oklab, var(--ink) 8%, transparent);
+    animation: sk-pulse 1.8s var(--ease-standard) infinite;
+  }
+
+  .sk-strong {
+    background-color: color-mix(in oklab, var(--ink) 14%, transparent);
+  }
+
+  .sk-faint {
+    background-color: color-mix(in oklab, var(--ink) 5%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sk {
+      animation: none;
+    }
+  }
+}
+
+@keyframes sk-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
+}
