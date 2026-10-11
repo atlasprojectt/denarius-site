@@ -1,17 +1,17 @@
 // Destinos de navegação e conversão do site.
 
-/**
- * Cadastro do app. Hoje é o modo "Criar conta" da tela de login, que sempre
- * abre em "Entrar" (conferido em 11/10/2026). Trocar pelo link direto do
- * cadastro quando o app aceitar um.
- */
-export const SIGNUP_URL = "https://app.usedenarius.pro/login";
-
-/** Login do app: a mesma tela, que já abre no modo "Entrar". */
+/** Login do app, para quem já tem acesso: a tela abre no modo "Entrar". */
 export const SIGNIN_URL = "https://app.usedenarius.pro/login";
 
 export const CONTACT_EMAIL = "joocrepaldi.pro@gmail.com";
 export const CONTACT_URL = `mailto:${CONTACT_EMAIL}`;
+
+/**
+ * Pedido de demonstração (decisão do fundador, 11/10/2026): o app está em beta
+ * fechado, sem cadastro aberto, e cada demonstração é marcada com o fundador.
+ * Um e-mail com o assunto pronto; nada de formulário nem agenda.
+ */
+export const DEMO_URL = `${CONTACT_URL}?subject=${encodeURIComponent("Demonstração do Denarius")}`;
 
 export const PRIVACY_URL = "https://app.usedenarius.pro/privacidade";
 export const TERMS_URL = "https://app.usedenarius.pro/termos";

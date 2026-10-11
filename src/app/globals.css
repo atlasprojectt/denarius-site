@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /*
  * Tokens de docs/nova-landing/DESIGN.md ("The Quiet Ledger").
@@ -425,3 +426,10 @@
     opacity: 0.55;
   }
 }
+
+/*
+ * Peças do produto (veredito, simulação): tokens do Denarius presos a
+ * .denarius. Fica no fim de propósito: o @theme acima zera as cores
+ * (--color-*: initial), e o que viesse antes dele seria apagado.
+ */
+@import "../denarius/tokens.css";

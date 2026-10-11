@@ -1,0 +1,110 @@
+import Link from "next/link";
+import { HugeiconsIcon } from "@hugeicons/react";
+
+import { domainIcons } from "@/denarius/components/domain/domain-icons";
+import { Card, CardContent, CardHeader, CardTitle } from "@/denarius/components/ui/card";
+import type { Cockpit } from "@/denarius/lib/engine/cockpit";
+import { buildHomeDigest, type DigestSegment } from "@/denarius/lib/narrate/digest";
+import { homeCopy } from "./copy";
+
+function renderSegment(segment: DigestSegment, index: number) {
+  const emphasisClass = segment.emphasis ? "font-medium text-foreground" : "";
+  if (segment.type === "text") {
+    return (
+      <span key={index} className={emphasisClass}>
+        {segment.value}
+      </span>
+    );
+  }
+  return (
+    <Link
+      key={index}
+      href={segment.href}
+      className={`rounded-sm text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-brand-accent focus-visible:decoration-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 ${emphasisClass}`}
+    >
+      {segment.value}
+    </Link>
+  );
+}
+
+export function ExecutiveDigestCard({
+  cockpit,
+  currency,
+}: {
+  cockpit: Cockpit;
+  currency: string;
+}) {
+  const attentionTeam =
+    cockpit.state === "ready" && cockpit.verdict.status === "red"
+      ? cockpit.verdict.teamId === null
+        ? null
+        : cockpit.needsAttention.find((team) => team.teamId === cockpit.verdict.teamId) ?? null
+      : cockpit.state === "ready"
+        ? cockpit.needsAttention[0] ?? null
+        : null;
+
+  const lines = buildHomeDigest(
+    cockpit.state === "cold-start"
+      ? {
+          status: "collecting",
+          collecting: true,
+          currency,
+          spent: 0,
+          budget: 0,
+          projection: null,
+          projectedMargin: null,
+          attentionTeam: null,
+        }
+      : {
+          status: cockpit.verdict.status,
+          collecting: cockpit.collecting,
+          currency,
+          spent: cockpit.org.spent,
+          budget: cockpit.org.budget,
+          projection: cockpit.org.projection,
+          projectedMargin: cockpit.org.projectedMargin,
+          attentionTeam: attentionTeam
+            ? { id: attentionTeam.teamId, name: attentionTeam.teamName }
+            : null,
+        },
+  );
+
+  return (
+    <Card
+      size="sm"
+      className="aspect-[1.16/1] min-h-0 w-full min-w-0 max-w-[24rem] self-start"
+      aria-labelledby="home-digest-title"
+    >
+      <CardHeader className="px-4">
+        <CardTitle as="h2" id="home-digest-title" className="flex items-center gap-2 text-sm">
+          <HugeiconsIcon icon={domainIcons.digest} className="size-4 text-ink-faint" aria-hidden />
+          {homeCopy.digest.title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex min-h-[10rem] flex-1 flex-col justify-center px-10 py-4 text-lg/[1.6] text-ink-secondary">
+        {cockpit.state === "cold-start" && (
+          <p
+            data-digest-lines
+            className="max-w-[38ch] digest-line font-medium text-foreground"
+            style={{ animationDelay: "40ms" }}
+          >
+            {homeCopy.digest.coldStart}
+          </p>
+        )}
+        {cockpit.state !== "cold-start" && (
+          <p data-digest-lines className="max-w-[38ch] text-pretty">
+            {lines.map((line, lineIndex) => (
+              <span
+                key={lineIndex}
+                className="digest-line block"
+                style={{ animationDelay: `${40 + lineIndex * 55}ms` }}
+              >
+                {line.map(renderSegment)}
+              </span>
+            ))}
+          </p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}

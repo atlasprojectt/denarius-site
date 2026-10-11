@@ -7,7 +7,7 @@ export function FaqList({ items, className }: { items: FaqItem[]; className?: st
   return (
     <div className={cn("border-t border-hairline", className)}>
       {items.map((item) => (
-        <details key={item.id} id={item.id} className="group scroll-mt-20 border-b border-hairline">
+        <details key={item.id} id={item.id} className="group scroll-mt-18 border-b border-hairline">
           <summary className="type-title flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-5 text-ink [&::-webkit-details-marker]:hidden">
             {item.question}
             <ChevronDownIcon className="size-4 shrink-0 text-mist transition-transform duration-180 ease-standard group-open:rotate-180 motion-reduce:transition-none" />

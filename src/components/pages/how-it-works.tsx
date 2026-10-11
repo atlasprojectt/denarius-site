@@ -1,12 +1,22 @@
 import { CtaBand } from "@/components/site/cta-band";
-import { MoreLink } from "@/components/site/more-link";
 import { NextPage } from "@/components/site/next-page";
 import { PageIntro } from "@/components/site/page-intro";
 import { VerdictList } from "@/components/site/verdict-list";
 import { AssetSlot } from "@/components/ui/asset-slot";
+import { CardStage } from "@/components/ui/card-stage";
 import { Section, SectionHeader } from "@/components/ui/section";
+import { ReportSheet } from "@/components/ui/report-sheet";
+import { ShowcaseCard } from "@/components/ui/showcase-card";
 import { StatusPill } from "@/components/ui/status-pill";
-import { PAGES, SIGNUP_URL } from "@/lib/links";
+import { chavesDados } from "@/denarius/chaves/chaves-dados";
+import { KeyEntryDemo } from "@/denarius/chaves/key-entry-demo";
+import { composicaoDados } from "@/denarius/composicao/composicao-dados";
+import { CompositionDemo } from "@/denarius/composicao/composition-demo";
+import { PAGES } from "@/lib/links";
+import fundoChaves from "@/assets/fundos/fundo-44.jpg";
+import fundoComposicao from "@/assets/fundos/fundo-38.jpg";
+import fundoRelatorio from "@/assets/fundos/fundo-39.jpg";
+
 
 const SECTIONS = [
   { id: "comecar", label: "Três passos" },
@@ -120,7 +130,7 @@ export function HowItWorksContent() {
         sections={SECTIONS}
       />
 
-      <Section id="comecar" labelledBy="comecar-titulo" size="compact">
+      <Section id="comecar" labelledBy="comecar-titulo" tone="rail" size="compact">
         <SectionHeader id="comecar-titulo" title="Três passos até o primeiro veredito." />
         <ol className="mt-10 grid gap-x-8 gap-y-10 md:mt-12 lg:grid-cols-3">
           {STEPS.map((step, index) => (
@@ -136,9 +146,15 @@ export function HowItWorksContent() {
             </li>
           ))}
         </ol>
-        <MoreLink href={SIGNUP_URL} className="mt-10 md:mt-12">
-          Comece sem chave: só assinaturas e times
-        </MoreLink>
+        {/* A conexão das chaves tocando sozinha (src/denarius/chaves): a chave
+            entra, conecta e ganha o check verde. */}
+        <div className="mt-10 grid gap-12 md:mt-12 lg:grid-cols-12">
+          <ShowcaseCard background={fundoChaves} bleed="left" className="lg:col-span-7">
+            <CardStage width={900} fit={0.92} className="inset-x-[4%] top-1/2 -translate-y-1/2">
+              <KeyEntryDemo {...chavesDados} />
+            </CardStage>
+          </ShowcaseCard>
+        </div>
       </Section>
 
       <Section id="composicao" labelledBy="composicao-titulo" size="compact">
@@ -148,12 +164,11 @@ export function HowItWorksContent() {
           lead="A pergunta “quanto gastamos, e quem gasta?” tem uma resposta só, somada por time, provedor e modelo."
         />
         <div className="mt-10 grid gap-12 md:mt-12 lg:grid-cols-12">
-          <AssetSlot
-            layout="composition"
-            label="Composição do gasto por provedor, por modelo e por assinatura"
-            className="lg:col-span-7"
-            frameClassName="aspect-[4/3]"
-          />
+          <ShowcaseCard background={fundoComposicao} bleed="left" className="lg:col-span-7">
+            <CardStage width={1000} fit={0.92} className="inset-x-[4%] top-[14%] bottom-0 overflow-hidden">
+              <CompositionDemo {...composicaoDados} />
+            </CardStage>
+          </ShowcaseCard>
           <NoteList notes={COMPOSITION_NOTES} className="flex flex-col gap-6 lg:col-span-5" />
         </div>
       </Section>
@@ -221,21 +236,18 @@ export function HowItWorksContent() {
 
       <Section id="relatorios" labelledBy="relatorios-titulo" size="compact">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="flex flex-col gap-10 lg:col-span-6">
+          <div className="flex flex-col gap-10 lg:col-span-5">
             <SectionHeader id="relatorios-titulo" title="Relatórios prontos para o conselho." />
             <NoteList notes={REPORT_NOTES} className="flex flex-col gap-6" />
           </div>
-          <AssetSlot
-            layout="report"
-            label="Relatório mensal congelado em PDF"
-            className="lg:col-span-5 lg:col-start-8"
-            frameClassName="aspect-[4/5]"
-          />
+          <ShowcaseCard background={fundoRelatorio} bleed="right" className="lg:col-span-7">
+            <ReportSheet />
+          </ShowcaseCard>
         </div>
       </Section>
 
       <NextPage page={PAGES.simulation} />
-      <CtaBand />
+      <CtaBand secondary={null} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-export type Theme = "system" | "light" | "dark";
+export type Theme = "light" | "dark";
 
 export const THEME_STORAGE_KEY = "denarius-theme";
 
@@ -8,17 +8,19 @@ export const THEME_STORAGE_KEY = "denarius-theme";
  */
 export const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem("${THEME_STORAGE_KEY}");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
 
-export function readStoredTheme(): Theme {
+/** A escolha salva, ou null quando a página segue o sistema. */
+export function readStoredTheme(): Theme | null {
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    return stored === "light" || stored === "dark" ? stored : "system";
+    return stored === "light" || stored === "dark" ? stored : null;
   } catch {
-    return "system";
+    return null;
   }
 }
 
-export function applyTheme(theme: Theme) {
+/** Fixa o tema escolhido; null devolve a página ao tema do sistema. */
+export function applyTheme(theme: Theme | null) {
   const root = document.documentElement;
-  if (theme === "system") root.removeAttribute("data-theme");
+  if (theme === null) root.removeAttribute("data-theme");
   else root.setAttribute("data-theme", theme);
 }

@@ -93,7 +93,7 @@ export function SecurityContent() {
         sections={SECTIONS}
       />
 
-      <Section id="leitura" labelledBy="leitura-titulo" size="compact">
+      <Section id="leitura" labelledBy="leitura-titulo" tone="rail" size="compact">
         <SectionHeader
           id="leitura-titulo"
           title="Só leitura, por princípio."

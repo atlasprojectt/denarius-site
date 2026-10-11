@@ -101,7 +101,7 @@ export function WhyNowContent() {
         </ol>
       </Section>
 
-      <Section id="problema" labelledBy="problema-titulo" size="compact">
+      <Section id="problema" labelledBy="problema-titulo" tone="rail" size="compact">
         <SectionHeader
           id="problema-titulo"
           title="Por que o gasto saiu do controle."

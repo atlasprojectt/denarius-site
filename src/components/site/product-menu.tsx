@@ -2,23 +2,28 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type PointerEvent } from "react";
 import { FEATURE_ICONS } from "@/components/ui/feature-icons";
 import { ArrowRightIcon, ChevronDownIcon } from "@/components/ui/state-icons";
 import { FEATURE_IDS, FEATURES, PAGES } from "@/lib/links";
 
 const PANEL_ID = "menu-produto";
+/** Folga para o mouse cruzar o vão entre o botão e o painel sem fechá-lo. */
+const CLOSE_DELAY_MS = 200;
 const PRODUCT_PATHS: string[] = [PAGES.howItWorks.href, PAGES.simulation.href];
 
 /**
  * O menu Produto da barra: as features, cada uma levando ao seu detalhe, e o
  * caminho para "Como funciona". Popover nativo: fecha com Esc, com um clique
- * fora e ao navegar.
+ * fora e ao navegar. Com o mouse, abre no hover e fecha ao sair do botão e do
+ * painel; no toque e no teclado, o botão alterna o painel.
  */
 export function ProductMenu() {
   const panelRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isProductPage = PRODUCT_PATHS.includes(pathname);
+  const hovering = useRef(false);
+  const closeTimer = useRef<number | undefined>(undefined);
 
   function close() {
     const panel = panelRef.current;
@@ -26,12 +31,34 @@ export function ProductMenu() {
   }
 
   useEffect(close, [pathname]);
+  useEffect(() => () => window.clearTimeout(closeTimer.current), []);
+
+  function onPointerEnter(event: PointerEvent<HTMLDivElement>) {
+    if (event.pointerType !== "mouse") return;
+    hovering.current = true;
+    window.clearTimeout(closeTimer.current);
+    const panel = panelRef.current;
+    if (panel && !panel.matches(":popover-open")) panel.showPopover();
+  }
+
+  function onPointerLeave(event: PointerEvent<HTMLDivElement>) {
+    if (event.pointerType !== "mouse") return;
+    hovering.current = false;
+    window.clearTimeout(closeTimer.current);
+    closeTimer.current = window.setTimeout(close, CLOSE_DELAY_MS);
+  }
 
   return (
-    <div className="group">
+    // O painel é filho deste bloco no DOM (mesmo na camada do topo), então
+    // passar do botão para o painel não conta como sair.
+    <div className="group" onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
       <button
         type="button"
         popoverTarget={PANEL_ID}
+        // Com o mouse em cima o painel já abriu: o clique não pode fechá-lo.
+        onClick={(event) => {
+          if (hovering.current) event.preventDefault();
+        }}
         data-active={isProductPage || undefined}
         className="type-ui flex h-8 items-center gap-1 rounded-full pr-2.5 pl-3 text-graphite transition-colors duration-150 ease-standard hover:bg-hover hover:text-ink data-active:font-medium data-active:text-ink"
       >
@@ -43,7 +70,7 @@ export function ProductMenu() {
         ref={panelRef}
         id={PANEL_ID}
         popover="auto"
-        className="fixed top-[4.5rem] right-auto bottom-auto left-1/2 m-0 h-fit w-[min(34rem,calc(100vw-2rem))] -translate-x-1/2 rounded-md border-0 bg-elevated p-1.5 text-ink shadow-lg ring-1 ring-ink/10"
+        className="fixed top-16 right-auto bottom-auto left-1/2 m-0 h-fit w-[min(34rem,calc(100vw-2rem))] -translate-x-1/2 rounded-md border-0 bg-elevated p-1.5 text-ink shadow-lg ring-1 ring-ink/10"
       >
         <nav aria-label="Produto">
           <ul className="flex flex-col gap-0.5">

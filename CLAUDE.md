@@ -49,8 +49,9 @@ Mostre o produto como ele é: telas reais com dados de demonstração, ou reprod
 
 ### Chamadas para ação
 
-- **"Fale com o fundador":** `mailto:joocrepaldi.pro@gmail.com`.
-- **"Simule o fechamento do seu mês"** e as demais chamadas do produto levam ao cadastro do app (decisão do fundador, 11/10/2026). Hoje o cadastro não tem endereço próprio: é o modo "Criar conta" da tela `https://app.usedenarius.pro/login`, que sempre abre em "Entrar" (conferido em 11/10/2026). Até o app aceitar um link direto para o cadastro, as chamadas apontam para essa URL. Quando ele aceitar, troque pelo link direto.
+- **"Pedir demonstração"** é a chamada principal (decisão do fundador, 11/10/2026, substitui "Simule o fechamento do seu mês" e "Criar conta"). O app está em beta fechado, sem cadastro aberto: cada demonstração é marcada com o fundador. O botão abre um e-mail para `joocrepaldi.pro@gmail.com` com o assunto "Demonstração do Denarius" (`DEMO_URL` em `src/lib/links.ts`). No cabeçalho o rótulo é "Pedir demo", para a barra caber num celular de 360px. Nunca "lista de espera".
+- **"Ver como funciona"** é a chamada secundária, no lugar de "Fale com o fundador": o caminho para quem ainda não quer conversar. Na própria página Como funciona, a chamada final fica só com o pedido de demonstração. O e-mail do fundador continua no footer e no lead das Perguntas.
+- **"Entrar"** fica no cabeçalho, para quem já tem acesso: `https://app.usedenarius.pro/login`.
 - **Footer:** Privacidade e Termos de uso são páginas do app, em `https://app.usedenarius.pro/privacidade` e `https://app.usedenarius.pro/termos`.
 
 Não invente formulário, agenda nem fluxo de demonstração.

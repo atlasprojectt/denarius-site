@@ -24,7 +24,7 @@ const FIGURES: Array<{ figure: string; text: string; source: Source }> = [
 
 export function ProblemSummary() {
   return (
-    <Section id="problema" labelledBy="problema-titulo">
+    <Section id="problema" labelledBy="problema-titulo" tone="rail">
       <h2 id="problema-titulo" className="type-display-section max-w-[22ch] text-ink">
         A IA virou um custo variável sem dono e sem orçamento.
       </h2>

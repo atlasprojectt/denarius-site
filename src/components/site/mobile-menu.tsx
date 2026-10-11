@@ -43,7 +43,7 @@ export function MobileMenu({ groups }: { groups: MenuGroup[] }) {
         ref={menuRef}
         id={MENU_ID}
         popover="auto"
-        className="fixed inset-x-4 top-[4.5rem] bottom-auto m-0 max-h-[calc(100dvh-6rem)] w-auto overflow-y-auto sm:left-auto sm:w-80 rounded-md border-0 bg-elevated p-1 text-ink shadow-lg ring-1 ring-ink/10"
+        className="fixed inset-x-4 top-16 bottom-auto m-0 max-h-[calc(100dvh-5.5rem)] w-auto overflow-y-auto sm:left-auto sm:w-80 rounded-md border-0 bg-elevated p-1 text-ink shadow-lg ring-1 ring-ink/10"
       >
         <nav aria-label="Site" className="flex flex-col gap-1">
           {groups.map((group, index) => (

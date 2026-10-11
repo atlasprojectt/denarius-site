@@ -18,6 +18,9 @@ export function Container({
 /**
  * Seção da landing. No canvas, uma régua fina a separa da anterior, como as
  * linhas de um livro-razão; a faixa "rail" muda o tom da superfície inteira.
+ * A faixa marca os momentos em que a página para de listar e argumenta: o
+ * problema com números, a saída (a Simulação), as garantias e o "como
+ * começar". Nunca duas seguidas, nem colada no footer, que também é rail.
  */
 export function Section({
   id,
@@ -40,7 +43,7 @@ export function Section({
       id={id}
       aria-labelledby={labelledBy}
       className={cn(
-        "scroll-mt-16",
+        "scroll-mt-14",
         size === "default"
           ? "py-[clamp(4.5rem,3rem+6vw,8.5rem)]"
           : "py-[clamp(3.5rem,2.5rem+4vw,6.5rem)]",

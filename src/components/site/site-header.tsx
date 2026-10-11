@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Brand } from "@/components/site/brand";
+import { HeaderShell } from "@/components/site/header-shell";
 import { MobileMenu, type MenuGroup } from "@/components/site/mobile-menu";
 import { NavLinks } from "@/components/site/nav-links";
 import { ProductMenu } from "@/components/site/product-menu";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/section";
-import { FEATURE_IDS, FEATURES, PAGES, SIGNIN_URL, SIGNUP_URL } from "@/lib/links";
+import { DEMO_URL, FEATURE_IDS, FEATURES, PAGES, SIGNIN_URL } from "@/lib/links";
 
 // Ao lado do menu Produto: o contexto, a confiança e as dúvidas.
 const HEADER_LINKS = [PAGES.whyNow, PAGES.security, PAGES.faq];
@@ -23,8 +24,8 @@ const MENU_GROUPS: MenuGroup[] = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-hairline bg-canvas">
-      <Container className="flex h-16 items-center justify-between gap-4">
+    <HeaderShell>
+      <Container className="flex h-14 items-center justify-between gap-4">
         <Link
           href="/"
           aria-label="Denarius, governança de gasto com IA. Ir para o início"
@@ -46,11 +47,12 @@ export function SiteHeader() {
               Entrar
             </ButtonLink>
           </div>
-          <ButtonLink href={SIGNUP_URL} size="md">
-            Criar conta
+          {/* "Demo" e não "demonstração": a barra precisa caber no celular. */}
+          <ButtonLink href={DEMO_URL} size="md">
+            Pedir demo
           </ButtonLink>
         </div>
       </Container>
-    </header>
+    </HeaderShell>
   );
 }

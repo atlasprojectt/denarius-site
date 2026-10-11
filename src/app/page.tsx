@@ -8,8 +8,6 @@ import { SpendSummary } from "@/components/home/spend-summary";
 import { TrustSummary } from "@/components/home/trust-summary";
 import { VerdictSummary } from "@/components/home/verdict-summary";
 import { CtaBand } from "@/components/site/cta-band";
-import { MoreLink } from "@/components/site/more-link";
-import { PAGES } from "@/lib/links";
 
 // A home mostra o essencial; cada seção termina num "Saiba mais" para a sua página.
 // As features seguem as perguntas do CEO na narrativa: quanto gastamos, vamos
@@ -26,11 +24,7 @@ export default function Home() {
       <ReportsSummary />
       <TrustSummary />
       <FaqTeaser />
-      <CtaBand lead="Três passos até o primeiro veredito: conecte as fontes, defina o orçamento e leia o veredito.">
-        <MoreLink href={PAGES.howItWorks.href} className="mt-2">
-          Saiba como funciona
-        </MoreLink>
-      </CtaBand>
+      <CtaBand lead="Três passos até o primeiro veredito: conecte as fontes, defina o orçamento e leia o veredito." />
     </>
   );
 }

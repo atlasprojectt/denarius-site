@@ -1,0 +1,382 @@
+/*
+ * Tokens do Denarius para as peças do produto (veredito, simulação), gerados
+ * do app/globals.css do Denarius. As cores valem só dentro de .denarius e cada
+ * uma vem em light-dark(claro, escuro), então a peça acompanha o tema do site
+ * (data-theme no <html> ou o sistema). Ao tema do site só se somam nomes que
+ * ele ainda não tem.
+ */
+
+/* dark: segue o tema do site, como os tokens light-dark(), e vale sempre
+   dentro de .scheme-dark (os cards da vitrine) e dos popups das peças. */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *, .scheme-dark, .scheme-dark *, [data-slot="sheet-overlay"], [data-slot="sheet-overlay"] *, [data-slot="sheet-content"], [data-slot="sheet-content"] *, [data-slot="select-content"], [data-slot="select-content"] *, [data-slot="tooltip-content"], [data-slot="tooltip-content"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/* Estados dos primitivos Base UI (shadcn/tailwind.css). */
+@custom-variant data-open {
+  &:where([data-state="open"]),
+  &:where([data-open]:not([data-open="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-closed {
+  &:where([data-state="closed"]),
+  &:where([data-closed]:not([data-closed="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-checked {
+  &:where([data-state="checked"]),
+  &:where([data-checked]:not([data-checked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-unchecked {
+  &:where([data-state="unchecked"]),
+  &:where([data-unchecked]:not([data-unchecked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-selected {
+  &:where([data-selected="true"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-disabled {
+  &:where([data-disabled="true"]),
+  &:where([data-disabled]:not([data-disabled="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-active {
+  &:where([data-state="active"]),
+  &:where([data-active]:not([data-active="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-horizontal {
+  &:where([data-orientation="horizontal"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-vertical {
+  &:where([data-orientation="vertical"]) {
+    @slot;
+  }
+}
+
+@utility rounded-pill {
+  border-radius: var(--radius-pill);
+}
+
+@utility label-caps {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-status-green: var(--status-green);
+  --color-status-green-soft: var(--status-green-soft);
+  --color-status-green-fg: var(--status-green-fg);
+  --color-status-amber: var(--status-amber);
+  --color-status-amber-soft: var(--status-amber-soft);
+  --color-status-amber-fg: var(--status-amber-fg);
+  --color-status-red: var(--status-red);
+  --color-status-red-soft: var(--status-red-soft);
+  --color-status-red-fg: var(--status-red-fg);
+  --color-badge-neutral: var(--badge-neutral);
+  --color-badge-neutral-soft: var(--badge-neutral-soft);
+  --color-badge-amber: var(--badge-amber);
+  --color-badge-amber-soft: var(--badge-amber-soft);
+  --color-badge-positive: var(--badge-positive);
+  --color-badge-positive-soft: var(--badge-positive-soft);
+  --color-badge-destructive: var(--badge-destructive);
+  --color-badge-destructive-soft: var(--badge-destructive-soft);
+  --color-pace-over: var(--pace-over);
+  --color-pace-overspent: var(--pace-overspent);
+  --color-sim-soft: var(--sim-soft);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-action: var(--brand-action);
+  --color-focus-ring: var(--focus-ring);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-selected: var(--sidebar-selected);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-faint: var(--ink-faint);
+  --color-sidebar-ink-subtle: var(--sidebar-ink-subtle);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-surface-deep: var(--surface-deep);
+  --color-surface-card: var(--surface-card);
+  --color-surface-canvas: var(--surface-canvas);
+  --color-surface-control: var(--surface-control);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-selected: var(--surface-selected);
+  --color-tab-active: var(--tab-active);
+  --radius-pill: 9999px;
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1.3;
+  --text-ui: 0.8125rem;
+  --text-ui--line-height: 1.4;
+  --text-display-sm: 2.25rem;
+  --text-display-sm--line-height: 1.08;
+  --text-display-sm--letter-spacing: -0.025em;
+  --text-display: 2.75rem;
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.025em;
+}
+
+.denarius,
+[data-slot="sheet-overlay"],
+[data-slot="sheet-content"],
+[data-slot="select-content"],
+[data-slot="tooltip-content"] {
+  --motion-duration-fast: 120ms;
+  --motion-duration-standard: 160ms;
+  --motion-duration-max: 180ms;
+  --motion-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-icon-shift: 3px;
+  --motion-icon-press-shift: 1px;
+  --motion-button-lift: 1px;
+  --surface-deep: light-dark(oklch(0.93 0 0), oklch(0.11 0 0));
+  --surface-canvas: light-dark(oklch(0.955 0 0), oklch(0.145 0 0));
+  --surface-card: light-dark(oklch(0.97 0 0), oklch(0.19 0 0));
+  --surface-control: light-dark(oklch(0.91 0 0), oklch(0.12 0 0));
+  --surface-elevated: light-dark(oklch(1 0 0), oklch(0.23 0 0));
+  --surface-hover: light-dark(oklch(0.945 0 0), oklch(0.21 0 0));
+  --surface-selected: light-dark(oklch(0.985 0 0), oklch(0.26 0 0));
+  --tab-active: light-dark(oklch(0.85 0 0), var(--surface-elevated));
+  --background: light-dark(var(--surface-canvas), var(--surface-canvas));
+  --foreground: light-dark(oklch(0.18 0 0), oklch(0.97 0 0));
+  --card: light-dark(var(--surface-card), var(--surface-card));
+  --card-foreground: light-dark(oklch(0.18 0 0), oklch(0.97 0 0));
+  --popover: light-dark(var(--surface-elevated), var(--surface-elevated));
+  --popover-foreground: light-dark(oklch(0.18 0 0), oklch(0.97 0 0));
+  --brand-accent: light-dark(#ff6524, #ff6524);
+  --brand-action: light-dark(#c7480d, #c7480d);
+  --focus-ring: light-dark(oklch(0.55 0 0), oklch(0.7 0 0));
+  --primary: light-dark(oklch(0.2 0 0), oklch(0.94 0 0));
+  --primary-foreground: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));
+  --primary-hover: light-dark(oklch(0.3 0 0), oklch(0.86 0 0));
+  --secondary: light-dark(var(--surface-control), var(--surface-control));
+  --secondary-foreground: light-dark(oklch(0.24 0 0), oklch(0.97 0 0));
+  --muted: light-dark(var(--surface-control), var(--surface-control));
+  --muted-foreground: light-dark(oklch(0.528 0 0), oklch(0.62 0 0));
+  --ink-secondary: light-dark(oklch(0.4 0 0), oklch(0.8 0 0));
+  --ink-faint: light-dark(oklch(0.63 0 0), oklch(0.52 0 0));
+  --sidebar-ink-subtle: light-dark(oklch(0.505 0 0), oklch(0.62 0 0));
+  --accent: light-dark(var(--surface-hover), var(--surface-hover));
+  --accent-foreground: light-dark(oklch(0.24 0 0), oklch(0.97 0 0));
+  --destructive: light-dark(oklch(0.577 0.245 27.325), oklch(0.704 0.191 22.216));
+  --border: light-dark(oklch(0.9 0 0), oklch(1 0 0 / 7%));
+  --input: light-dark(oklch(0.9 0 0), oklch(1 0 0 / 11%));
+  --ring: light-dark(var(--focus-ring), var(--focus-ring));
+  --chart-1: light-dark(var(--foreground), var(--foreground));
+  --chart-2: light-dark(color-mix(in oklab, var(--foreground) 58%, transparent), color-mix(in oklab, var(--foreground) 58%, transparent));
+  --chart-3: light-dark(color-mix(in oklab, var(--foreground) 70%, transparent), color-mix(in oklab, var(--foreground) 70%, transparent));
+  --chart-4: light-dark(color-mix(in oklab, var(--foreground) 52%, transparent), color-mix(in oklab, var(--foreground) 52%, transparent));
+  --chart-5: light-dark(color-mix(in oklab, var(--foreground) 36%, transparent), color-mix(in oklab, var(--foreground) 36%, transparent));
+  --radius: 0.875rem;
+  --sidebar: light-dark(var(--surface-deep), var(--surface-deep));
+  --sidebar-foreground: light-dark(oklch(0.18 0 0), oklch(0.97 0 0));
+  --sidebar-primary: light-dark(oklch(0.2 0 0), oklch(0.94 0 0));
+  --sidebar-primary-foreground: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));
+  --sidebar-accent: light-dark(oklch(0.95 0 0), oklch(0.19 0 0));
+  --sidebar-selected: light-dark(oklch(0.89 0 0), var(--sidebar-accent));
+  --sidebar-hover: light-dark(oklch(0.91 0 0), var(--surface-hover));
+  --sidebar-accent-foreground: light-dark(oklch(0.18 0 0), oklch(0.98 0 0));
+  --sidebar-border: light-dark(oklch(0.89 0 0), oklch(1 0 0 / 12%));
+  --sidebar-ring: light-dark(var(--focus-ring), var(--focus-ring));
+  --green-base: #22c55e;
+  --amber-base: #f59e0b;
+  --red-base: #e5303c;
+  --status-green: light-dark(var(--green-base), color-mix(in srgb, var(--green-base), white 10%));
+  --status-green-soft: color-mix(in oklab, var(--status-green) 12%, transparent);
+  --status-green-fg: light-dark(color-mix(in srgb, var(--green-base), black 45%), var(--status-green));
+  --status-amber: light-dark(var(--amber-base), color-mix(in srgb, var(--amber-base), white 10%));
+  --status-amber-soft: color-mix(in oklab, var(--status-amber) 12%, transparent);
+  --status-amber-fg: light-dark(color-mix(in srgb, var(--amber-base), black 45%), var(--status-amber));
+  --status-red: light-dark(var(--red-base), color-mix(in srgb, var(--red-base), white 10%));
+  --status-red-soft: color-mix(in oklab, var(--status-red) 12%, transparent);
+  --status-red-fg: light-dark(color-mix(in srgb, var(--red-base), black 20%), color-mix(in srgb, var(--status-red), white 20%));
+  --badge-neutral: light-dark(oklch(0.43 0 0), oklch(0.71 0 0));
+  --badge-neutral-soft: color-mix(in oklab, var(--badge-neutral) 12%, transparent);
+  --badge-amber: var(--status-amber-fg);
+  --badge-amber-soft: color-mix(in oklab, var(--status-amber) 12%, transparent);
+  --badge-positive: var(--status-green-fg);
+  --badge-positive-soft: color-mix(in oklab, var(--status-green) 12%, transparent);
+  --badge-destructive: var(--status-red-fg);
+  --badge-destructive-soft: color-mix(in oklab, var(--status-red) 12%, transparent);
+  --pace-orange-base: #f67a12;
+  --pace-red-base: var(--red-base);
+  --pace-orange: light-dark(var(--pace-orange-base), color-mix(in srgb, var(--pace-orange-base), white 10%));
+  --pace-red: light-dark(var(--pace-red-base), color-mix(in srgb, var(--pace-red-base), white 10%));
+  --pace-spent: var(--pace-orange);
+  --pace-overspent: var(--pace-red);
+  --pace-projected: light-dark(color-mix(in srgb, var(--pace-orange), white 60%), color-mix(in srgb, var(--pace-orange), black 60%));
+  --pace-over: light-dark(color-mix(in srgb, var(--pace-red), white 60%), color-mix(in srgb, var(--pace-red), black 60%));
+  --pace-budget: light-dark(oklch(0.88 0 0), oklch(0.36 0 0));
+  --sim-violet-base: #7357ff;
+  --sim-violet: light-dark(var(--sim-violet-base), color-mix(in srgb, var(--sim-violet-base), white 10%));
+  --sim-1: light-dark(color-mix(in srgb, var(--sim-violet), black 30%), var(--sim-violet));
+  --sim-2: light-dark(var(--sim-violet), color-mix(in srgb, var(--sim-violet), black 28%));
+  --sim-3: light-dark(color-mix(in srgb, var(--sim-violet), white 45%), color-mix(in srgb, var(--sim-violet), black 48%));
+  --sim-4: light-dark(color-mix(in srgb, var(--sim-violet), white 72%), color-mix(in srgb, var(--sim-violet), black 64%));
+  --sim-ink: light-dark(color-mix(in srgb, var(--sim-violet), black 22%), color-mix(in srgb, var(--sim-violet), white 30%));
+  --sim-soft: light-dark(color-mix(in oklab, var(--sim-violet) 10%, transparent), color-mix(in oklab, var(--sim-violet) 16%, transparent));
+  color: var(--foreground);
+}
+
+[data-slot="sheet-overlay"],
+[data-slot="sheet-content"],
+[data-slot="select-content"],
+[data-slot="tooltip-content"] {
+  color-scheme: dark;
+}
+
+@layer base {
+  .denarius *,
+  [data-slot="sheet-overlay"] *,
+  [data-slot="sheet-content"] *,
+  [data-slot="select-content"] *,
+  [data-slot="tooltip-content"] *,
+  .denarius ::before,
+  [data-slot="sheet-overlay"] ::before,
+  [data-slot="sheet-content"] ::before,
+  [data-slot="select-content"] ::before,
+  [data-slot="tooltip-content"] ::before,
+  .denarius ::after,
+  [data-slot="sheet-overlay"] ::after,
+  [data-slot="sheet-content"] ::after,
+  [data-slot="select-content"] ::after,
+  [data-slot="tooltip-content"] ::after {
+    border-color: var(--border);
+  }
+
+  .denarius button:not(:disabled),
+  [data-slot="sheet-overlay"] button:not(:disabled),
+  [data-slot="sheet-content"] button:not(:disabled),
+  [data-slot="select-content"] button:not(:disabled),
+  [data-slot="tooltip-content"] button:not(:disabled),
+  .denarius [role="button"]:not(:disabled),
+  [data-slot="sheet-overlay"] [role="button"]:not(:disabled),
+  [data-slot="sheet-content"] [role="button"]:not(:disabled),
+  [data-slot="select-content"] [role="button"]:not(:disabled),
+  [data-slot="tooltip-content"] [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Cards: o fundo tokenizado e um contorno suave. */
+.denarius [data-slot="card"],
+  [data-slot="sheet-overlay"] [data-slot="card"],
+  [data-slot="sheet-content"] [data-slot="card"],
+  [data-slot="select-content"] [data-slot="card"],
+  [data-slot="tooltip-content"] [data-slot="card"] {
+  background-color: var(--card);
+  --tw-ring-color: color-mix(in oklab, var(--foreground) 6%, transparent);
+}
+
+/* Movimento dos botões: o empurrão do ícone e a subida do primário. */
+.denarius [data-slot="button"][data-motion="forward"] [data-icon="inline-end"],
+.denarius [data-slot="button"][data-motion="backward"] [data-icon="inline-start"],
+.denarius [data-slot="button"][data-motion="disclosure"] [data-icon="disclosure"] {
+  transition-property: color, transform;
+  transition-duration: var(--motion-duration-fast);
+  transition-timing-function: var(--motion-ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .denarius [data-slot="button"][data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([data-loading="true"]):hover {
+    transform: translateY(calc(0px - var(--motion-button-lift)));
+  }
+
+  .denarius [data-slot="button"][data-motion="forward"]:not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([data-loading="true"]):hover [data-icon="inline-end"] {
+    transform: translateX(var(--motion-icon-shift));
+  }
+
+  .denarius [data-slot="button"][data-motion="backward"]:not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([data-loading="true"]):hover [data-icon="inline-start"] {
+    transform: translateX(calc(0px - var(--motion-icon-shift)));
+  }
+
+  .denarius [data-slot="button"][data-motion="disclosure"]:not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([data-loading="true"]):hover [data-icon="disclosure"] {
+    color: var(--foreground);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .denarius [data-slot="button"][data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([data-loading="true"]):active {
+    transform: translateY(var(--motion-button-lift));
+  }
+
+  .denarius [data-slot="button"][data-motion="forward"]:not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([data-loading="true"]):active [data-icon="inline-end"] {
+    transform: translateX(var(--motion-icon-press-shift));
+  }
+
+  .denarius [data-slot="button"][data-motion="backward"]:not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([data-loading="true"]):active [data-icon="inline-start"] {
+    transform: translateX(calc(0px - var(--motion-icon-press-shift)));
+  }
+
+  .denarius [data-slot="button"][data-motion="disclosure"][aria-expanded="true"] [data-icon="disclosure"] {
+    transform: rotate(180deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .denarius [data-slot="button"],
+  .denarius [data-slot="button"] [data-icon="inline-end"],
+  .denarius [data-slot="button"] [data-icon="inline-start"],
+  .denarius [data-slot="button"] [data-icon="disclosure"] {
+    transition-duration: var(--motion-duration-fast);
+    transform: none;
+  }
+}

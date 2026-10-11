@@ -43,7 +43,7 @@ export function SiteFooter() {
   return (
     <footer className="band-rail">
       <Container className="flex flex-col gap-12 py-14 md:py-16">
-        <div className="grid gap-10 sm:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr_auto] lg:gap-10">
+        <div className="grid gap-10 sm:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10">
           <div className="flex flex-col gap-3 sm:col-span-3 lg:col-span-1">
             <Brand />
             <p className="type-body max-w-[36ch] text-graphite">
@@ -74,12 +74,14 @@ export function SiteFooter() {
               </ul>
             </nav>
           ))}
-
-          <ThemeSwitcher className="sm:col-span-3 lg:col-span-1" />
         </div>
 
-        <div className="type-caption flex flex-col gap-2 border-t border-hairline pt-6 text-ash md:flex-row md:justify-between">
-          <p>© 2026 Denarius</p>
+        {/* O tema fica no canto de baixo, à esquerda, fora do conteúdo. */}
+        <div className="type-caption flex flex-col gap-4 border-t border-hairline pt-6 text-ash md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <ThemeSwitcher />
+            <p>© 2026 Denarius</p>
+          </div>
           <p>Os exemplos com números neste site são ilustrativos.</p>
         </div>
       </Container>

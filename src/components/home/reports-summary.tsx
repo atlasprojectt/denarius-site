@@ -1,6 +1,8 @@
 import { MoreLink } from "@/components/site/more-link";
-import { AssetSlot } from "@/components/ui/asset-slot";
 import { Section } from "@/components/ui/section";
+import { ReportSheet } from "@/components/ui/report-sheet";
+import { ShowcaseCard } from "@/components/ui/showcase-card";
+import fundo from "@/assets/fundos/fundo-39.jpg";
 import { FEATURES } from "@/lib/links";
 
 export function ReportsSummary() {
@@ -23,12 +25,9 @@ export function ReportsSummary() {
           </MoreLink>
         </div>
 
-        <AssetSlot
-          layout="report"
-          label="Relatório mensal congelado em PDF"
-          className="lg:col-span-6 lg:col-start-7"
-          frameClassName="aspect-[4/3]"
-        />
+        <ShowcaseCard background={fundo} bleed="right" className="lg:col-span-7">
+          <ReportSheet />
+        </ShowcaseCard>
       </div>
     </Section>
   );

@@ -1,6 +1,11 @@
 import { MoreLink } from "@/components/site/more-link";
-import { AssetSlot } from "@/components/ui/asset-slot";
+import { CardStage } from "@/components/ui/card-stage";
 import { Section } from "@/components/ui/section";
+import { SHOWCASE_HOVER, ShowcaseCard } from "@/components/ui/showcase-card";
+import { EmailDemo } from "@/denarius/resumo-email/email-demo";
+import { resumoEmailDados } from "@/denarius/resumo-email/resumo-email-dados";
+import fundo from "@/assets/fundos/fundo-43.jpg";
+import { cn } from "@/lib/cn";
 import { FEATURES } from "@/lib/links";
 
 const EMAILS = [
@@ -18,12 +23,19 @@ export function EmailSummary() {
   return (
     <Section id="emails" labelledBy="emails-titulo">
       <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-12">
-        <AssetSlot
-          layout="email"
-          label="E-mail de alerta de um time em atenção"
-          className="order-last lg:order-first lg:col-span-7"
-          frameClassName="aspect-[4/3]"
-        />
+        <ShowcaseCard background={fundo} bleed="left" className="order-last lg:order-first lg:col-span-7">
+          {/* O resumo semanal desenhado em código (src/denarius/resumo-email), e
+              não num print, para ficar nítido em qualquer tela. A janela tem
+              1280px e passa da borda de baixo. */}
+          <CardStage width={1280} fit={0.84} className={cn("top-[14%] left-[8%] origin-top", SHOWCASE_HOVER)}>
+            <div
+              role="img"
+              aria-label="Resumo semanal do Denarius aberto na caixa de entrada: o veredito do mês, o gasto contra o orçamento, a projeção de fechamento e os times que mais consomem"
+            >
+              <EmailDemo {...resumoEmailDados} />
+            </div>
+          </CardStage>
+        </ShowcaseCard>
 
         <div className="flex flex-col gap-5 lg:col-span-5">
           <h2 id="emails-titulo" className="type-display-section text-ink">

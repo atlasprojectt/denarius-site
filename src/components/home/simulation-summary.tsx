@@ -1,6 +1,10 @@
 import { MoreLink } from "@/components/site/more-link";
-import { AssetSlot } from "@/components/ui/asset-slot";
+import { CardStage } from "@/components/ui/card-stage";
 import { Section } from "@/components/ui/section";
+import { ShowcaseCard } from "@/components/ui/showcase-card";
+import { SimulationDemo } from "@/denarius/simulacao/simulation-demo";
+import { simulacaoDados } from "@/denarius/simulacao/simulacao-dados";
+import fundo from "@/assets/fundos/fundo-44.jpg";
 import { FEATURES } from "@/lib/links";
 
 export function SimulationSummary() {
@@ -40,12 +44,13 @@ export function SimulationSummary() {
           </MoreLink>
         </div>
 
-        <AssetSlot
-          layout="simulation"
-          label="Simulação do time, com a economia, o fechamento antes e depois e o plano por dia"
-          className="lg:col-span-7"
-          frameClassName="aspect-[4/3]"
-        />
+        {/* A Simulação real (src/denarius/simulacao), interativa, no mesmo card
+            dos outros: o topo da projeção e do plano, o resto recortado. */}
+        <ShowcaseCard background={fundo} bleed="right" className="lg:col-span-7">
+          <CardStage width={900} fit={0.95} className="top-[6%] left-[2.5%]">
+            <SimulationDemo {...simulacaoDados} />
+          </CardStage>
+        </ShowcaseCard>
       </div>
     </Section>
   );
