@@ -1,313 +1,435 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Class-based dark variant (matches the Denarius app) so the landing can be
-   pinned to dark mode via a `dark` class on <html>. */
-@custom-variant dark (&:is(.dark *));
+/*
+ * Tokens de docs/nova-landing/DESIGN.md ("The Quiet Ledger").
+ * Cada token traz o valor claro e o escuro em light-dark(); o tema segue o
+ * sistema e o seletor do footer fixa data-theme="light" | "dark" no <html>.
+ * Valores marcados "extensão" não estão no DESIGN.md e foram derivados das
+ * regras dele para a landing.
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Escada de tintas: primary, secondary, subtle, faint */
+  --ink: light-dark(oklch(0.18 0 0), oklch(0.97 0 0));
+  --graphite: light-dark(oklch(0.4 0 0), oklch(0.8 0 0));
+  --ash: light-dark(oklch(0.528 0 0), oklch(0.62 0 0));
+  --ash-rail: light-dark(oklch(0.505 0 0), oklch(0.62 0 0));
+  --mist: light-dark(oklch(0.63 0 0), oklch(0.52 0 0));
+
+  /* Superfícies, empilhadas por tom */
+  --surface-rail: light-dark(oklch(0.93 0 0), oklch(0.11 0 0));
+  --surface-canvas: light-dark(oklch(0.955 0 0), oklch(0.145 0 0));
+  --surface-card: light-dark(oklch(0.97 0 0), oklch(0.19 0 0));
+  --surface-control: light-dark(oklch(0.91 0 0), oklch(0.12 0 0));
+  --surface-elevated: light-dark(oklch(1 0 0), oklch(0.23 0 0));
+  --surface-hover: light-dark(oklch(0.945 0 0), oklch(0.21 0 0));
+  --hairline: light-dark(oklch(0.9 0 0), oklch(1 0 0 / 7%));
+  /* Escuro: extensão, para o foco manter 3:1 sobre o canvas. */
+  --focus-ring: light-dark(oklch(0.55 0 0), oklch(0.7 0 0));
+
+  /* Ação primária: tinta, nunca laranja */
+  --action: light-dark(oklch(0.2 0 0), oklch(0.94 0 0));
+  --action-hover: light-dark(oklch(0.3 0 0), oklch(0.86 0 0));
+  --on-action: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));
+
+  /* Marca e estado ligado */
+  --coin-orange: #ff6524;
+  --signal-orange: #c7480d;
+
+  /* Semáforo: só status de orçamento */
+  --green-base: #22c55e;
+  --amber-base: #f59e0b;
+  --red-base: #e5303c;
+  --status-green: light-dark(
+    var(--green-base),
+    color-mix(in srgb, var(--green-base), white 10%)
+  );
+  --status-amber: light-dark(
+    var(--amber-base),
+    color-mix(in srgb, var(--amber-base), white 10%)
+  );
+  --status-red: light-dark(
+    var(--red-base),
+    color-mix(in srgb, var(--red-base), white 10%)
+  );
+  --status-green-fg: light-dark(
+    color-mix(in srgb, var(--green-base), black 45%),
+    var(--status-green)
+  );
+  --status-amber-fg: light-dark(
+    color-mix(in srgb, var(--amber-base), black 45%),
+    var(--status-amber)
+  );
+  --status-red-fg: light-dark(
+    color-mix(in srgb, var(--red-base), black 20%),
+    color-mix(in srgb, var(--red-base), white 30%)
+  );
+  --status-green-soft: color-mix(in oklab, var(--status-green) 12%, transparent);
+  --status-amber-soft: color-mix(in oklab, var(--status-amber) 12%, transparent);
+  --status-red-soft: color-mix(in oklab, var(--status-red) 12%, transparent);
+  /* Escuro: extensão, o neutro segue a tinta secundária. */
+  --badge-neutral: light-dark(oklch(0.43 0 0), oklch(0.8 0 0));
+  --badge-neutral-soft: color-mix(in oklab, var(--badge-neutral) 12%, transparent);
+
+  /* Domínio do gasto: laranja do ritmo */
+  --pace-orange: light-dark(#f67a12, color-mix(in srgb, #f67a12, white 10%));
+  --pace-spent: var(--pace-orange);
+  --pace-projected: light-dark(
+    color-mix(in srgb, #f67a12, white 60%),
+    color-mix(in srgb, color-mix(in srgb, #f67a12, white 10%), black 60%)
+  );
+  /* Escuro: extensão, um cinza quieto sobre o card escuro. */
+  --pace-budget: light-dark(oklch(0.88 0 0), oklch(0.32 0 0));
+
+  /* Domínio da simulação: violeta, do mais caro (1) ao mais barato (4) */
+  --sim-violet: #7357ff;
+  --sim-1: light-dark(
+    color-mix(in srgb, var(--sim-violet), black 30%),
+    color-mix(in srgb, var(--sim-violet), white 10%)
+  );
+  --sim-2: light-dark(
+    var(--sim-violet),
+    color-mix(in srgb, color-mix(in srgb, var(--sim-violet), white 10%), black 28%)
+  );
+  --sim-3: light-dark(
+    color-mix(in srgb, var(--sim-violet), white 45%),
+    color-mix(in srgb, color-mix(in srgb, var(--sim-violet), white 10%), black 48%)
+  );
+  --sim-4: light-dark(
+    color-mix(in srgb, var(--sim-violet), white 72%),
+    color-mix(in srgb, color-mix(in srgb, var(--sim-violet), white 10%), black 64%)
+  );
+  /* Extensão: o DESIGN.md nomeia --sim-ink sem valor; este segura AA nos dois temas. */
+  --sim-ink: light-dark(
+    color-mix(in srgb, var(--sim-violet), black 30%),
+    color-mix(in srgb, var(--sim-violet), white 35%)
+  );
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Faixa no tom do rail: a tinta sutil troca para o degrau que passa 4.5:1 ali. */
+.band-rail {
+  background-color: var(--surface-rail);
+  --ash: var(--ash-rail);
+}
+
+@theme {
+  --color-*: initial;
+  --color-white: #fff;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-hover: var(--secondary-hover);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary-hover: var(--primary-hover);
-  --color-destructive: var(--destructive);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-ash: var(--ash);
+  --color-mist: var(--mist);
 
-  /* Brand — the coin/accent orange. */
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-accent-light: var(--brand-accent-light);
-  --color-brand-accent-muted: var(--brand-accent-muted);
-  --color-brand-accent-border: var(--brand-accent-border);
-  --color-brand-action: var(--brand-action);
+  --color-rail: var(--surface-rail);
+  --color-canvas: var(--surface-canvas);
+  --color-card: var(--surface-card);
+  --color-control: var(--surface-control);
+  --color-elevated: var(--surface-elevated);
+  --color-hover: var(--surface-hover);
+  --color-hairline: var(--hairline);
+  --color-focus: var(--focus-ring);
 
-  /* Semaphore — reserved for budget status. */
-  --color-status-green: var(--status-green);
-  --color-status-amber: var(--status-amber);
-  --color-status-red: var(--status-red);
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-on-action: var(--on-action);
 
-  /* Poppins nos títulos, DM Mono nos textos explicativos e rótulos. Os nomes
-     `sans`/`mono` são mantidos para que todo `font-sans`/`font-mono` já escrito
-     herde a troca sem edição. */
-  --font-sans: var(--font-poppins);
-  --font-mono: var(--font-dm-mono);
-  --font-heading: var(--font-poppins);
+  --color-coin: var(--coin-orange);
+  --color-signal: var(--signal-orange);
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 0.875rem;
-  --radius-xl: 0.875rem;
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.25rem;
+  --color-green-fg: var(--status-green-fg);
+  --color-green-soft: var(--status-green-soft);
+  --color-amber-fg: var(--status-amber-fg);
+  --color-amber-soft: var(--status-amber-soft);
+  --color-red-fg: var(--status-red-fg);
+  --color-red-soft: var(--status-red-soft);
+  --color-neutral-fg: var(--badge-neutral);
+  --color-neutral-soft: var(--badge-neutral-soft);
 
-  /* Motion (UI.md): fast 120ms, standard 160ms, cap 180ms.
-     Espelham os tokens de `landing/motion.ts` — CSS e Motion partem dos mesmos
-     números para que transição e animação não andem em ritmos diferentes. */
-  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-fast: 120ms;
-  --duration-standard: 160ms;
-  --duration-small: 180ms;
-  /* Entradas de seção não são "small interactions", então podem respirar. */
-  --duration-reveal: 400ms;
-}
+  --color-pace-spent: var(--pace-spent);
+  --color-pace-projected: var(--pace-projected);
+  --color-pace-budget: var(--pace-budget);
 
-:root {
-  color-scheme: dark;
+  --color-sim-1: var(--sim-1);
+  --color-sim-2: var(--sim-2);
+  --color-sim-3: var(--sim-3);
+  --color-sim-4: var(--sim-4);
+  --color-sim-ink: var(--sim-ink);
 
-  /* Paleta Denarius: uma única fonte de verdade para todo o site. */
-  --sidebar: #050404;
-  --sidebar-foreground: lab(98.2686% -0.0991821 0.364304);
-  --sidebar-primary: #ff5a1f;
-  --sidebar-primary-foreground: lab(97.7008% 1.53735 5.90649);
-  /* O cinza. É o único: todas as superfícies acima do fundo saem daqui, sem
-     degraus intermediários. */
-  --sidebar-accent: #0c0b0b;
-
-  --background: var(--sidebar);
-  --foreground: var(--sidebar-foreground);
-  --card: var(--sidebar-accent);
-  --card-foreground: var(--sidebar-foreground);
-  --popover: var(--sidebar-accent);
-  --popover-foreground: var(--sidebar-foreground);
-  --brand-accent: var(--sidebar-primary);
-  --brand-accent-light: color-mix(
-    in lab,
-    var(--sidebar-primary) 72%,
-    var(--sidebar-foreground)
-  );
-  --brand-action: var(--sidebar-primary);
-  --brand-accent-muted: color-mix(
-    in lab,
-    var(--sidebar-primary) 14%,
-    transparent
-  );
-  --brand-accent-border: color-mix(
-    in lab,
-    var(--sidebar-primary) 30%,
-    transparent
-  );
-  --focus-ring: var(--sidebar-primary);
-  --primary: var(--sidebar-primary);
-  /* Texto preto sobre o laranja, como no moodboard. Também é a leitura correta
-     de contraste: #ff5a1f com branco dá ~3.2:1 e reprova no AA; com o preto da
-     marca dá ~6.4:1. O seed `--sidebar-primary-foreground` fica intacto porque
-     espelha o app e nenhum componente do site o consome. */
-  --primary-foreground: var(--sidebar);
-  --primary-hover: color-mix(
-    in lab,
-    var(--sidebar-primary) 88%,
-    var(--sidebar-foreground)
-  );
-  /* O cinza dos botões. Um passo acima do cinza das seções — o corpo do botão
-     precisa ler como controle, não como fundo. É por isso que ele não deriva
-     de `--sidebar-accent`: se repetisse o cinza das seções, sumiria no card. */
-  --secondary: #1d1b1b;
-  --secondary-foreground: var(--sidebar-foreground);
-  /* O hover do botão secundário. Mais claro que o corpo, para o botão
-     responder ao ponteiro sem virar outra superfície. */
-  --secondary-hover: color-mix(
-    in lab,
-    var(--secondary) 88%,
-    var(--sidebar-foreground)
-  );
-  /* `muted` não é uma terceira superfície: é o estado de hover do cinza das
-     seções. Um passo mínimo, só o suficiente para o hover responder ao
-     ponteiro. */
-  --muted: color-mix(
-    in lab,
-    var(--sidebar-accent) 92%,
-    var(--sidebar-foreground)
-  );
-  /* O texto secundário recua um passo: ele acompanha, não disputa com o
-     título. 58% é o piso — abaixo disso o contraste sobre `--background` cai
-     de 4.5:1 e reprova no AA. */
-  --muted-foreground: color-mix(
-    in lab,
-    var(--sidebar-foreground) 58%,
-    var(--sidebar)
-  );
-  --accent: var(--sidebar-accent);
-  --accent-foreground: var(--sidebar-foreground);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: color-mix(
-    in lab,
-    var(--sidebar-foreground) 11%,
-    transparent
-  );
-  --input: color-mix(
-    in lab,
-    var(--sidebar-foreground) 10%,
-    transparent
-  );
-  --ring: var(--focus-ring);
-  --status-green: #22c55e;
-  --status-amber: #f59e0b;
-  --status-red: #ef4444;
-
-  /* A linha da moldura. Não é guia nem fundo: é a borda que delimita onde o
-     conteúdo pode existir, e por isso ela vive no fluxo do documento — é
-     borda de container, rolando junto com a página, e não uma camada fixa
-     por trás dela. É o que dá corpo à composição em vez de decorá-la. */
-  --frame-line: color-mix(in lab, var(--sidebar-foreground) 8%, transparent);
-}
-
-.dark {
-  color-scheme: dark;
-}
-
-/* ---------------------------------------------------------------------------
-   TEXTO EXPLICATIVO — a voz secundária da marca, em DM Mono.
-
-   Vive como utilitário, e não como constante de classe, porque é usado por
-   Server e Client Components: assim nenhum deles precisa importar nada.
-   DM Mono tem eixo x largo, então cai um passo abaixo do tamanho do sans para
-   ocupar a mesma mancha de texto.
---------------------------------------------------------------------------- */
-@utility explainer {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.875rem;
-  line-height: 1.7;
-  letter-spacing: -0.01em;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply font-sans;
-  }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
+    background-color: var(--surface-canvas);
+    color: var(--ink);
+    scrollbar-color: color-mix(in oklab, var(--ink) 22%, transparent) transparent;
+    -webkit-text-size-adjust: 100%;
   }
 
-  /* Motion is decorative here — never required to read the page.
-     `animation-timeline` also has to be reset: for a scroll-driven animation
-     the duration is ignored, so zeroing it would not stop the movement. The
-     Motion library is handled separately, by `reducedMotion="user"` in
-     `motion-provider.tsx`. */
+  body {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--ink) 16%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  a {
+    text-underline-offset: 4px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+}
+
+/*
+ * Estilos de texto do DESIGN.md. Cada um é uma combinação fixa de tamanho,
+ * entrelinha, peso e tracking; a tinta vem à parte.
+ * Os três "display-*" são extensão da landing: acima de 44px, sempre peso 300.
+ */
+@utility type-display-hero {
+  font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.75rem);
+  line-height: 1.02;
+  font-weight: 300;
+  letter-spacing: -0.035em;
+}
+
+@utility type-display-section {
+  font-size: clamp(2.25rem, 1.75rem + 1.6vw, 3.25rem);
+  line-height: 1.08;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+@utility type-display-stat {
+  font-size: clamp(2.75rem, 2.1rem + 1.9vw, 3.75rem);
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility type-display-money {
+  font-size: 2.25rem;
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+
+  @media (width >= 48rem) {
+    font-size: 2.75rem;
+  }
+}
+
+@utility type-headline {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility type-title-lg {
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility type-narrative {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+@utility type-metric {
+  font-size: 1.125rem;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility type-title {
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+@utility type-lead {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@utility type-body {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+@utility type-body-strong {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+@utility type-ui {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+@utility type-ui-strong {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+@utility type-caption {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@utility type-caption-strong {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+@utility type-label-caps {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@utility type-badge {
+  font-size: 0.6875rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Links de texto. Receita do DESIGN.md: sublinhado de tinta a 30%, a 4px do
+ * texto. No hover e no foco do teclado o sublinhado fica laranja, a exceção
+ * que o app já abre para os links do resumo executivo, estendida a todos os
+ * links do site (decisão do fundador, 11/10/2026). Só o traço muda de cor;
+ * o texto continua na tinta.
+ */
+@utility link-underline {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklab, var(--ink) 30%, transparent);
+  text-underline-offset: 4px;
+  transition-property: color, text-decoration-color;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-standard);
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: var(--coin-orange);
+  }
+}
+
+/* O mesmo traço laranja para links que só sublinham no hover (o rodapé). */
+@utility link-hover-underline {
+  text-underline-offset: 4px;
+  text-decoration-color: var(--coin-orange);
+  transition-property: color;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-standard);
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-line: underline;
+  }
+}
+
+/* Skeleton: mesma geometria do que representa, com pulso. */
+@layer components {
+  .sk {
+    display: block;
+    border-radius: var(--radius-sm);
+    background-color: color-mix(in oklab, var(--ink) 8%, transparent);
+    animation: sk-pulse 1.8s var(--ease-standard) infinite;
+  }
+
+  .sk-strong {
+    background-color: color-mix(in oklab, var(--ink) 14%, transparent);
+  }
+
+  .sk-faint {
+    background-color: color-mix(in oklab, var(--ink) 5%, transparent);
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      animation-timeline: auto !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+    .sk {
+      animation: none;
     }
   }
 }
 
-/* ---------------------------------------------------------------------------
-   MODO WIREFRAME — só para revisar a estrutura da página.
-   Achata cor, fundo, sombra e imagem em linhas de contorno.
-   Para voltar ao design real: remova "wireframe" do <html> em layout.tsx.
---------------------------------------------------------------------------- */
-.wireframe {
-  color-scheme: dark;
-  --wf-line: #333;
-  --wf-line-strong: #5c5c5c;
-  --wf-ink: #e8e8e8;
-  --wf-dim: #7a7a7a;
-  background: #0a0a0a !important;
+@keyframes sk-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
 }
 
-.wireframe *,
-.wireframe *::before,
-.wireframe *::after {
-  background: none !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  backdrop-filter: none !important;
-  filter: none !important;
-  color: var(--wf-ink) !important;
-  border-color: var(--wf-line) !important;
-  border-radius: 2px !important;
-}
-
-/* Blocos estruturais — linha mais forte. */
-.wireframe header,
-.wireframe main,
-.wireframe footer,
-.wireframe section {
-  outline: 1px solid var(--wf-line-strong);
-  outline-offset: -1px;
-}
-
-/* Conteúdo dentro dos blocos — linha mais leve. */
-.wireframe article,
-.wireframe nav,
-.wireframe ul,
-.wireframe ol,
-.wireframe dl,
-.wireframe table,
-.wireframe figure,
-.wireframe details,
-.wireframe button,
-.wireframe [data-asset],
-.wireframe [role="img"],
-.wireframe a[class*="inline-flex"] {
-  outline: 1px solid var(--wf-line);
-  outline-offset: -1px;
-}
-
-/* Cada seção mostra sua âncora, para ler a ordem da página. */
-.wireframe section[id]::before,
-.wireframe div[id]:has(> header)::before {
-  content: "#" attr(id);
-  display: block;
-  padding: 2px 6px;
-  border-bottom: 1px solid var(--wf-line);
-  font-family: var(--font-mono), monospace;
-  font-size: 10px;
-  color: var(--wf-dim) !important;
-}
-
-/* Imagens viram caixas vazias, mantendo o espaço que ocupam. */
-.wireframe *:has(> img) {
-  outline: 1px solid var(--wf-line);
-  outline-offset: -1px;
-}
-
-.wireframe img {
-  visibility: hidden !important;
-}
-
-/* Decoração (glow, bolinhas, setas) sai de cena. */
-.wireframe [aria-hidden="true"] {
-  display: none !important;
-}
-
-/* Ícones ficam discretos; o header para de flutuar sobre o conteúdo. */
-.wireframe svg {
-  opacity: 0.35 !important;
-}
-
-.wireframe header {
-  position: static !important;
-}
+/*
+ * Peças do produto (veredito, simulação): tokens do Denarius presos a
+ * .denarius. Fica no fim de propósito: o @theme acima zera as cores
+ * (--color-*: initial), e o que viesse antes dele seria apagado.
+ */
+@import "../denarius/tokens.css";
