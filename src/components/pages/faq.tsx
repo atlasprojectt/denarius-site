@@ -1,6 +1,7 @@
 import { CtaBand } from "@/components/site/cta-band";
 import { FaqList } from "@/components/site/faq-list";
 import { PageIntro } from "@/components/site/page-intro";
+import { PAGE_ICONS } from "@/components/ui/page-icons";
 import { Section } from "@/components/ui/section";
 import { FAQ_GROUPS } from "@/content/faq";
 import { CONTACT_URL } from "@/lib/links";
@@ -9,6 +10,7 @@ export function FaqContent() {
   return (
     <>
       <PageIntro
+        icon={PAGE_ICONS.faq}
         title="Perguntas frequentes"
         lead={
           <>

@@ -428,6 +428,50 @@
 }
 
 /*
+ * Números que contam (CountUp): até o componente hidratar e zerar o contador,
+ * o valor fica escondido para não piscar o número final antes de contar. Só
+ * vale com JS (data-js, posto no <head>) e com movimento permitido; sem isso o
+ * valor aparece direto.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-js] [data-countup]:not([data-countup-ready]) {
+    visibility: hidden;
+  }
+}
+
+/*
+ * Gráfico que se desenha (ChartReveal): a linha e o degradê entram da
+ * esquerda para a direita (clip-path, 1.6s) e cada ponto, com o seu valor,
+ * aparece quando a linha chega nele (--reveal-delay, posto em cada ponto). A
+ * folga de -8px no recorte final deixa à mostra as pontas arredondadas da
+ * linha. Mesma regra do CountUp: só com JS e movimento permitido.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-js] [data-chart-reveal] .chart-draw {
+    clip-path: inset(-8px 100% -8px -8px);
+    transition: clip-path 1.6s cubic-bezier(0.45, 0, 0.25, 1);
+  }
+
+  :root[data-js] [data-chart-reveal][data-inview] .chart-draw {
+    clip-path: inset(-8px -8px -8px -8px);
+  }
+
+  :root[data-js] [data-chart-reveal] .chart-point {
+    opacity: 0;
+    translate: 0 6px;
+    transition:
+      opacity 0.4s var(--ease-standard),
+      translate 0.4s var(--ease-standard);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  :root[data-js] [data-chart-reveal][data-inview] .chart-point {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/*
  * Peças do produto (veredito, simulação): tokens do Denarius presos a
  * .denarius. Fica no fim de propósito: o @theme acima zera as cores
  * (--color-*: initial), e o que viesse antes dele seria apagado.

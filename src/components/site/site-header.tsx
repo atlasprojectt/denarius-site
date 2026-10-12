@@ -25,7 +25,10 @@ const MENU_GROUPS: MenuGroup[] = [
 export function SiteHeader() {
   return (
     <HeaderShell>
-      <Container className="flex h-14 items-center justify-between gap-4">
+      {/* No topo, logo e botões abrem até as bordas do vídeo do hero (o
+          conteúdo mais o avanço dos cards, --showcase-bleed, de cada lado);
+          rolando, voltam para a largura do conteúdo. */}
+      <Container className="flex h-14 items-center justify-between gap-4 transition-[max-width] duration-300 ease-standard motion-reduce:transition-none lg:max-w-[calc(76rem+2*var(--showcase-bleed))] lg:group-data-scrolled/header:max-w-[76rem]">
         <Link
           href="/"
           aria-label="Denarius, governança de gasto com IA. Ir para o início"
