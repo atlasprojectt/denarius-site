@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { CtaBand } from "@/components/site/cta-band";
 import { NextPage } from "@/components/site/next-page";
 import { PageIntro } from "@/components/site/page-intro";
+import { PAGE_ICONS } from "@/components/ui/page-icons";
 import { AssetSlot } from "@/components/ui/asset-slot";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { cn } from "@/lib/cn";
@@ -142,6 +143,7 @@ export function SimulationContent() {
   return (
     <>
       <PageIntro
+        icon={PAGE_ICONS.simulation}
         title="O painel mostra o gasto. O Denarius mostra a saída."
         lead="Ver o gasto virou gratuito; decidir, não. A Simulação responde o que vem depois: se isto mudar a partir de amanhã, quanto o mês economiza e onde o time fecha contra o orçamento?"
         sections={SECTIONS}

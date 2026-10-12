@@ -60,10 +60,17 @@ export function ProductMenu() {
           if (hovering.current) event.preventDefault();
         }}
         data-active={isProductPage || undefined}
-        className="type-ui flex h-8 items-center gap-1 rounded-full pr-2.5 pl-3 text-graphite transition-colors duration-150 ease-standard hover:bg-hover hover:text-ink data-active:font-medium data-active:text-ink"
+        className="type-ui flex h-8 items-center gap-1 rounded-full pr-2.5 pl-3 text-graphite transition-colors duration-150 ease-standard group-hover:bg-hover group-hover:text-ink group-has-[:popover-open]:bg-hover group-has-[:popover-open]:text-ink data-active:font-medium data-active:text-ink"
       >
-        Produto
-        <ChevronDownIcon className="size-3.5 transition-transform duration-150 ease-standard group-has-[:popover-open]:rotate-180 motion-reduce:transition-none" />
+        {/* Parado, só o texto, centrado no espaço do botão (deslocado metade
+            da seta + gap: 9px). No hover, com o painel aberto ou no foco do
+            teclado, o texto desliza para a esquerda e a seta entra à direita,
+            dentro do pill. A largura do botão não muda, então os vizinhos não
+            andam. No toque não há hover: texto e seta ficam sempre no lugar. */}
+        <span className="translate-x-[9px] transition-[translate] duration-200 ease-standard group-hover:translate-x-0 group-has-[:popover-open]:translate-x-0 group-has-[:focus-visible]:translate-x-0 pointer-coarse:translate-x-0 motion-reduce:transition-none">
+          Produto
+        </span>
+        <ChevronDownIcon className="size-3.5 opacity-0 transition-[opacity,rotate] duration-200 ease-standard group-hover:opacity-100 group-has-[:popover-open]:rotate-180 group-has-[:popover-open]:opacity-100 group-has-[:focus-visible]:opacity-100 pointer-coarse:opacity-100 motion-reduce:transition-none" />
       </button>
 
       <div

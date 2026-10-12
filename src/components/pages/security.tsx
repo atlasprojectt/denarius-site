@@ -1,6 +1,7 @@
 import { CtaBand } from "@/components/site/cta-band";
 import { NextPage } from "@/components/site/next-page";
 import { PageIntro } from "@/components/site/page-intro";
+import { PAGE_ICONS } from "@/components/ui/page-icons";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { PAGES } from "@/lib/links";
 
@@ -88,6 +89,7 @@ export function SecurityContent() {
   return (
     <>
       <PageIntro
+        icon={PAGE_ICONS.security}
         title="Nenhuma linha de código muda. Nenhum prompt passa por nós."
         lead="O Denarius lê, consolida, projeta e simula o gasto com IA. Nunca limita o uso e nunca age sozinho: o sistema aponta, a empresa decide."
         sections={SECTIONS}
