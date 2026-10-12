@@ -7,11 +7,12 @@ export const CONTACT_EMAIL = "joocrepaldi.pro@gmail.com";
 export const CONTACT_URL = `mailto:${CONTACT_EMAIL}`;
 
 /**
- * Pedido de demonstração (decisão do fundador, 11/10/2026): o app está em beta
- * fechado, sem cadastro aberto, e cada demonstração é marcada com o fundador.
- * Um e-mail com o assunto pronto; nada de formulário nem agenda.
+ * Pedido de demonstração: o app está em beta fechado, sem cadastro aberto, e
+ * cada demonstração é marcada com o fundador. Desde 12/10/2026 (decisão do
+ * fundador), um formulário em /demonstracao que chega por e-mail (lib/demo);
+ * antes era um mailto com o assunto pronto.
  */
-export const DEMO_URL = `${CONTACT_URL}?subject=${encodeURIComponent("Demonstração do Denarius")}`;
+export const DEMO_URL = "/demonstracao";
 
 export const PRIVACY_URL = "https://app.usedenarius.pro/privacidade";
 export const TERMS_URL = "https://app.usedenarius.pro/termos";

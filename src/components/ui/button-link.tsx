@@ -22,6 +22,18 @@ type ButtonLinkProps = ComponentProps<"a"> & {
   size?: Size;
 };
 
+/** As classes do botão, para usar também num <button> (ex.: o envio de um formulário). */
+export function buttonClasses({
+  variant = "primary",
+  size = "lg",
+}: { variant?: Variant; size?: Size } = {}) {
+  return cn(
+    "type-body-strong inline-flex min-h-11 items-center justify-center gap-2 rounded-full whitespace-nowrap transition-[background-color,color,translate] duration-150 ease-standard md:min-h-0",
+    VARIANTS[variant],
+    SIZES[size],
+  );
+}
+
 /** Link com a forma de botão do DESIGN.md: cápsula de tinta, nunca laranja. */
 export function ButtonLink({
   variant = "primary",
@@ -29,15 +41,5 @@ export function ButtonLink({
   className,
   ...props
 }: ButtonLinkProps) {
-  return (
-    <a
-      className={cn(
-        "type-body-strong inline-flex min-h-11 items-center justify-center gap-2 rounded-full whitespace-nowrap transition-[background-color,color,translate] duration-150 ease-standard md:min-h-0",
-        VARIANTS[variant],
-        SIZES[size],
-        className,
-      )}
-      {...props}
-    />
-  );
+  return <a className={cn(buttonClasses({ variant, size }), className)} {...props} />;
 }
