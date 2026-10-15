@@ -17,6 +17,9 @@ export const DEMO_URL = "/demonstracao";
 export const PRIVACY_URL = "https://app.usedenarius.pro/privacidade";
 export const TERMS_URL = "https://app.usedenarius.pro/termos";
 
+export const LINKEDIN_URL = "https://www.linkedin.com/company/usedenarius/";
+export const GITHUB_URL = "https://github.com/atlasprojectt";
+
 /** Páginas do site, na ordem de leitura. */
 export const PAGES = {
   home: { href: "/", label: "Início" },
