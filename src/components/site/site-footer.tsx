@@ -7,6 +7,8 @@ import {
   CONTACT_URL,
   FEATURE_IDS,
   FEATURES,
+  GITHUB_URL,
+  LINKEDIN_URL,
   PAGES,
   PRIVACY_URL,
   TERMS_URL,
@@ -30,6 +32,8 @@ const COLUMNS: Array<{ id: string; title: string; links: SiteLink[]; external?: 
     external: true,
     links: [
       { href: CONTACT_URL, label: CONTACT_EMAIL },
+      { href: LINKEDIN_URL, label: "LinkedIn" },
+      { href: GITHUB_URL, label: "GitHub" },
       { href: PRIVACY_URL, label: "Privacidade" },
       { href: TERMS_URL, label: "Termos de uso" },
     ],
