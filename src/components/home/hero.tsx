@@ -1,3 +1,4 @@
+import { HeroVideo } from "@/components/home/hero-video";
 import SpecularButton from "@/components/react-bits/SpecularButton";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/section";
@@ -69,8 +70,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Vídeo de teste do produto (1920×1080, sem áudio): toca sozinho,
-            mudo e em loop. As dimensões reservam o espaço antes de carregar.
+        {/* Vídeo do produto (1920×1080, sem áudio): toca sozinho, mudo, em
+            loop e 1,25× mais rápido. As dimensões reservam o espaço antes de carregar.
             Avança para as duas margens como os cards das seções (o mesmo
             --showcase-bleed): vai da borda de um card que avança para a
             esquerda até a de um que avança para a direita. A navbar no topo
@@ -79,8 +80,8 @@ export function Hero() {
           className={cn("mt-12 flex flex-col gap-2.5 md:mt-16", videoBleed.className)}
           style={videoBleed.style}
         >
-          <video
-            src="/videos/hero-teste.mp4"
+          <HeroVideo
+            src="/videos/hero.mp4"
             width={1920}
             height={1080}
             autoPlay
