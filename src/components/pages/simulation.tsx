@@ -1,12 +1,15 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { CtaBand } from "@/components/site/cta-band";
 import { NextPage } from "@/components/site/next-page";
 import { PageIntro } from "@/components/site/page-intro";
 import { PAGE_ICONS } from "@/components/ui/page-icons";
-import { AssetSlot } from "@/components/ui/asset-slot";
 import { Section, SectionHeader } from "@/components/ui/section";
+import { SHOWCASE_HOVER, ShowcaseCard } from "@/components/ui/showcase-card";
 import { cn } from "@/lib/cn";
 import { PAGES } from "@/lib/links";
+import fundoSimulacao from "@/assets/fundos/fundo-44.jpg";
+import telaSimulacao from "@/assets/telas/simulacao-time.webp";
 
 const SECTIONS = [
   { id: "exemplo", label: "Exemplo" },
@@ -182,12 +185,27 @@ export function SimulationContent() {
             <p className="type-caption mt-6 text-ash">Exemplo ilustrativo.</p>
           </div>
 
-          <AssetSlot
-            layout="simulation"
-            label="Simulação do time, com a economia, o fechamento antes e depois e o plano por dia"
-            className="lg:sticky lg:top-24 lg:col-span-7"
-            frameClassName="aspect-[4/3]"
-          />
+          {/* A tela real da Simulação de um time (2000×1645), no fundo da
+              Simulação da home, sobre um painel na superfície escura do app,
+              como a lista de times em Como funciona. */}
+          <div className="flex flex-col gap-2.5 lg:sticky lg:top-24 lg:col-span-7">
+            <ShowcaseCard background={fundoSimulacao}>
+              <div
+                className={cn(
+                  "absolute top-1/2 left-1/2 w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-background p-[2%] ring-1 ring-white/8",
+                  SHOWCASE_HOVER,
+                )}
+              >
+                <Image
+                  src={telaSimulacao}
+                  alt="Simulação do time Engenharia: com Claude Haiku 4.5 no lugar de Claude Sonnet 4.5 a partir do dia 19, o mês fecha em ≈ R$ 19.910,95 contra R$ 24.439,42 no ritmo atual, ≈ R$ 4.528,47 a menos, abaixo do orçamento de R$ 22.000,00."
+                  sizes="(min-width: 1024px) 40rem, 90vw"
+                  className="block h-auto w-full"
+                />
+              </div>
+            </ShowcaseCard>
+            <p className="type-caption text-ash">Exemplo ilustrativo. Valores com ≈ são Simulação.</p>
+          </div>
         </div>
       </Section>
 
